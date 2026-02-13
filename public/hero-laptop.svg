@@ -1,0 +1,33 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="90" x2="1080" y2="810" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B172A"/>
+      <stop offset="1" stop-color="#1F2E46"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="360" y1="600" x2="1010" y2="210" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9"/>
+      <stop offset="1" stop-color="#22C55E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="#F8FAFC"/>
+  <rect x="84" y="72" width="1032" height="756" rx="48" fill="url(#bg)"/>
+  <rect x="144" y="144" width="432" height="186" rx="24" fill="#101C30"/>
+  <rect x="182" y="184" width="168" height="16" rx="8" fill="#67E8F9"/>
+  <rect x="182" y="218" width="286" height="12" rx="6" fill="#64748B"/>
+  <rect x="182" y="246" width="220" height="12" rx="6" fill="#64748B"/>
+  <rect x="624" y="144" width="432" height="186" rx="24" fill="#0D1627" stroke="#2E3E57"/>
+  <rect x="662" y="184" width="150" height="16" rx="8" fill="#86EFAC"/>
+  <rect x="662" y="218" width="286" height="12" rx="6" fill="#4B5F7A"/>
+  <rect x="662" y="246" width="224" height="12" rx="6" fill="#4B5F7A"/>
+  <rect x="144" y="372" width="912" height="372" rx="28" fill="#0B1424" stroke="#2E3E57"/>
+  <rect x="190" y="426" width="262" height="258" rx="20" fill="#0F1B2F"/>
+  <rect x="470" y="426" width="248" height="258" rx="20" fill="#0F1B2F"/>
+  <rect x="736" y="426" width="274" height="258" rx="20" fill="#0F1B2F"/>
+  <path d="M228 634L286 542L336 590L402 516" stroke="#67E8F9" stroke-width="12" stroke-linecap="round"/>
+  <path d="M514 630L568 534L642 574L684 510" stroke="#86EFAC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M778 630L842 548L910 594L970 524" stroke="#A7F3D0" stroke-width="12" stroke-linecap="round"/>
+  <path d="M692 674C760 592 778 520 856 468C920 426 1008 424 1040 346" stroke="url(#accent)" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="692" cy="674" r="22" fill="#22D3EE"/>
+  <circle cx="856" cy="468" r="22" fill="#22C55E"/>
+  <circle cx="1040" cy="346" r="22" fill="#86EFAC"/>
+</svg>

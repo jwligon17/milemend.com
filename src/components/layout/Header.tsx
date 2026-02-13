@@ -1,0 +1,372 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import type { KeyboardEvent as ReactKeyboardEvent } from "react";
+
+import { milemendContent } from "@/content/milemend";
+import type { MainNavItem, MilemendContent } from "@/content/milemend";
+
+type HeaderProps = {
+  content?: MilemendContent;
+};
+
+function cn(...classes: Array<string | false | null | undefined>) {
+  return classes.filter(Boolean).join(" ");
+}
+
+function columnsClass(count: number) {
+  if (count >= 3) return "md:grid-cols-3";
+  if (count === 2) return "md:grid-cols-2";
+  return "md:grid-cols-2";
+}
+
+function getNavHref(item: MainNavItem) {
+  if (item.href) return item.href;
+  return item.megaMenu?.groups[0]?.links[0]?.href ?? "#";
+}
+
+export function Header({ content = milemendContent }: HeaderProps) {
+  const desktopNav = useMemo(() => content.mainNav, [content.mainNav]);
+  const [openDesktopIndex, setOpenDesktopIndex] = useState<number | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openMobileIndex, setOpenMobileIndex] = useState<number | null>(null);
+  const [logoFailed, setLogoFailed] = useState(false);
+
+  const wrapperRef = useRef<HTMLElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const panelId = useId();
+  const topBarText = content.topBar.text;
+  const emphasizedText = content.topBar.emphasize;
+  const emphasisStart = topBarText.indexOf(emphasizedText);
+  const hasEmphasis = emphasisStart >= 0;
+  const logoSrc = content.brand.logo?.src;
+  const logoAlt = content.brand.logo?.alt ?? content.brand.name;
+
+  useEffect(() => {
+    setLogoFailed(false);
+  }, [logoSrc]);
+
+  useEffect(() => {
+    function onPointerDown(event: PointerEvent) {
+      if (!wrapperRef.current?.contains(event.target as Node)) {
+        setOpenDesktopIndex(null);
+        setMobileOpen(false);
+      }
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setOpenDesktopIndex((current) => {
+          if (current !== null) triggerRefs.current[current]?.focus();
+          return null;
+        });
+        setMobileOpen(false);
+      }
+    }
+
+    window.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (openDesktopIndex === null) return;
+
+    function onFocusIn(event: FocusEvent) {
+      const target = event.target as Node;
+      if (!wrapperRef.current?.contains(target)) {
+        setOpenDesktopIndex(null);
+      }
+    }
+
+    window.addEventListener("focusin", onFocusIn);
+    return () => {
+      window.removeEventListener("focusin", onFocusIn);
+    };
+  }, [openDesktopIndex]);
+
+  const handleDesktopKeyDown = (
+    event: ReactKeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    const lastIndex = desktopNav.length - 1;
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      const next = index === lastIndex ? 0 : index + 1;
+      triggerRefs.current[next]?.focus();
+      setOpenDesktopIndex(next);
+    }
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      const prev = index === 0 ? lastIndex : index - 1;
+      triggerRefs.current[prev]?.focus();
+      setOpenDesktopIndex(prev);
+    }
+    if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
+      event.preventDefault();
+      setOpenDesktopIndex(index);
+      requestAnimationFrame(() => {
+        const firstLink = panelRef.current?.querySelector<HTMLAnchorElement>("a[href]");
+        firstLink?.focus();
+      });
+    }
+  };
+
+  return (
+    <header ref={wrapperRef} className="sticky top-0 z-40 border-b border-slate-200/80 bg-white">
+      {content.topBar.enabled ? (
+        <div className="w-full bg-[#0B1020]">
+          <div className="grid w-full place-items-center px-4 py-1 sm:py-1.5">
+            <p className="m-0 text-center text-[12px] leading-4 text-white sm:text-[13px] sm:leading-5">
+              {hasEmphasis ? (
+                <>
+                  {topBarText.slice(0, emphasisStart)}
+                  <span className="font-semibold text-white">{emphasizedText}</span>
+                  {topBarText.slice(emphasisStart + emphasizedText.length)}
+                </>
+              ) : (
+                topBarText
+              )}
+            </p>
+          </div>
+        </div>
+      ) : null}
+
+      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-4 sm:px-6 lg:px-8">
+        <Link href="/" className="inline-flex items-center" aria-label={content.brand.name}>
+          {logoSrc && !logoFailed ? (
+            <img
+              src={logoSrc}
+              alt={logoAlt}
+              className="block h-9 w-auto"
+              onError={() => setLogoFailed(true)}
+            />
+          ) : (
+            <span className="inline-flex items-center gap-2">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-slate-950 text-sm font-semibold text-white">
+                MM
+              </span>
+              <span className="text-lg font-semibold tracking-tight text-slate-950">
+                {content.brand.name}
+              </span>
+            </span>
+          )}
+        </Link>
+        {logoSrc ? (
+          <a href={logoSrc} target="_blank" rel="noreferrer" className="sr-only">
+            Open logo
+          </a>
+        ) : null}
+
+        <nav className="hidden justify-self-center lg:block" aria-label="Main Navigation">
+          <ul className="flex items-center gap-8">
+            {desktopNav.map((item, index) => {
+              const hasMegaMenu = Boolean(item.megaMenu?.groups?.length);
+              const isOpen = openDesktopIndex === index;
+              const controls = `${panelId}-${index}`;
+
+              return (
+                <li key={item.label}>
+                  {hasMegaMenu ? (
+                    <button
+                      ref={(element) => {
+                        triggerRefs.current[index] = element;
+                      }}
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={controls}
+                      onClick={() => setOpenDesktopIndex(isOpen ? null : index)}
+                      onFocus={() => setOpenDesktopIndex(index)}
+                      onKeyDown={(event) => handleDesktopKeyDown(event, index)}
+                      className={cn(
+                        "border-b-2 border-transparent px-0.5 py-2 text-sm font-medium transition-colors",
+                        isOpen
+                          ? "border-slate-900 text-slate-950"
+                          : "text-slate-900 hover:border-slate-900 hover:text-slate-950",
+                      )}
+                    >
+                      {item.label}
+                    </button>
+                  ) : (
+                    <Link
+                      href={getNavHref(item)}
+                      className="border-b-2 border-transparent px-0.5 py-2 text-sm font-medium text-slate-900 transition-colors hover:border-slate-900 hover:text-slate-950"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <button
+          type="button"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav-drawer"
+          onClick={() => setMobileOpen((value) => !value)}
+          className="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-800 lg:hidden"
+        >
+          Menu
+        </button>
+      </div>
+
+      <div className="hidden border-y border-slate-200/80 bg-[linear-gradient(90deg,#E9FFF0_0%,#FFF8F4_50%,#FFD8D2_100%)] lg:block">
+        <div className="mx-auto flex max-w-7xl justify-end px-4 py-2 sm:px-6 lg:px-8">
+          <ul className="flex items-center text-sm text-slate-700">
+            {content.utilityLinks.map((link, index) => (
+              <li key={link.label} className="flex items-center">
+                {index > 0 ? <span className="mx-4 h-4 w-px bg-slate-300/70" aria-hidden /> : null}
+                <Link
+                  href={link.href}
+                  className="rounded-sm transition hover:text-slate-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {openDesktopIndex !== null && desktopNav[openDesktopIndex]?.megaMenu ? (
+        <div
+          id={`${panelId}-${openDesktopIndex}`}
+          ref={panelRef}
+          role="dialog"
+          aria-modal="false"
+          aria-label={`${desktopNav[openDesktopIndex].label} menu`}
+          className="absolute inset-x-0 border-y border-slate-200 bg-white shadow-lg"
+        >
+          <div
+            className={cn(
+              "mx-auto grid max-w-7xl gap-6 px-4 py-7 sm:px-6 lg:px-8",
+              columnsClass(desktopNav[openDesktopIndex].megaMenu!.groups.length),
+            )}
+          >
+            {desktopNav[openDesktopIndex].megaMenu!.groups.map((group) => (
+              <div key={group.title}>
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-cyan-800">
+                  {group.title}
+                </p>
+                <ul className="space-y-1">
+                  {group.links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="block rounded-md px-2 py-2 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-700"
+                        onClick={() => setOpenDesktopIndex(null)}
+                      >
+                        <p className="text-sm font-semibold text-slate-900">{link.label}</p>
+                        {link.description ? (
+                          <p className="mt-0.5 text-sm text-slate-600">{link.description}</p>
+                        ) : null}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {mobileOpen ? (
+        <div className="lg:hidden">
+          <div
+            className="fixed inset-0 z-40 bg-slate-950/55"
+            aria-hidden
+            onClick={() => setMobileOpen(false)}
+          />
+          <div
+            id="mobile-nav-drawer"
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto border-l border-slate-200 bg-white p-5 shadow-xl"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+          >
+            <div className="mb-6 flex items-center justify-between">
+              <p className="text-sm font-semibold text-slate-900">{content.brand.name}</p>
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-700"
+              >
+                Close
+              </button>
+            </div>
+
+            <ul className="space-y-2">
+              {content.mainNav.map((item, index) => {
+                const groups = item.megaMenu?.groups ?? [];
+                const isOpen = openMobileIndex === index;
+                const accordionId = `mobile-accordion-${index}`;
+
+                if (!groups.length) {
+                  return (
+                    <li key={item.label}>
+                      <Link
+                        href={getNavHref(item)}
+                        className="block rounded-md border border-slate-200 px-4 py-3 text-sm font-medium text-slate-800"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li key={item.label} className="rounded-lg border border-slate-200">
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={accordionId}
+                      onClick={() => setOpenMobileIndex(isOpen ? null : index)}
+                      className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold text-slate-900"
+                    >
+                      <span>{item.label}</span>
+                      <span aria-hidden>{isOpen ? "−" : "+"}</span>
+                    </button>
+
+                    {isOpen ? (
+                      <div id={accordionId} className="space-y-4 px-4 pb-4">
+                        {groups.map((group) => (
+                          <div key={group.title}>
+                            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-cyan-800">
+                              {group.title}
+                            </p>
+                            <ul className="space-y-1">
+                              {group.links.map((link) => (
+                                <li key={link.label}>
+                                  <Link
+                                    href={link.href}
+                                    onClick={() => setMobileOpen(false)}
+                                    className="block rounded-md px-2 py-2 text-sm text-slate-700 transition hover:bg-slate-100"
+                                  >
+                                    {link.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
+
+          </div>
+        </div>
+      ) : null}
+    </header>
+  );
+}
