@@ -31,22 +31,15 @@ export function Header({ content = milemendContent }: HeaderProps) {
   const [openDesktopIndex, setOpenDesktopIndex] = useState<number | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMobileIndex, setOpenMobileIndex] = useState<number | null>(null);
-  const [logoFailed, setLogoFailed] = useState(false);
+  const [failedLogoSrc, setFailedLogoSrc] = useState<string | null>(null);
 
   const wrapperRef = useRef<HTMLElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const panelId = useId();
-  const topBarText = content.topBar.text;
-  const emphasizedText = content.topBar.emphasize;
-  const emphasisStart = topBarText.indexOf(emphasizedText);
-  const hasEmphasis = emphasisStart >= 0;
   const logoSrc = content.brand.logo?.src;
   const logoAlt = content.brand.logo?.alt ?? content.brand.name;
-
-  useEffect(() => {
-    setLogoFailed(false);
-  }, [logoSrc]);
+  const logoAvailable = Boolean(logoSrc) && failedLogoSrc !== logoSrc;
 
   useEffect(() => {
     function onPointerDown(event: PointerEvent) {
@@ -118,34 +111,21 @@ export function Header({ content = milemendContent }: HeaderProps) {
   };
 
   return (
-    <header ref={wrapperRef} className="sticky top-0 z-40 border-b border-slate-200/80 bg-white">
-      {content.topBar.enabled ? (
-        <div className="w-full bg-[#0B1020]">
-          <div className="grid w-full place-items-center px-4 py-1 sm:py-1.5">
-            <p className="m-0 text-center text-[12px] leading-4 text-white sm:text-[13px] sm:leading-5">
-              {hasEmphasis ? (
-                <>
-                  {topBarText.slice(0, emphasisStart)}
-                  <span className="font-semibold text-white">{emphasizedText}</span>
-                  {topBarText.slice(emphasisStart + emphasizedText.length)}
-                </>
-              ) : (
-                topBarText
-              )}
-            </p>
-          </div>
-        </div>
-      ) : null}
-
-      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="inline-flex items-center" aria-label={content.brand.name}>
-          {logoSrc && !logoFailed ? (
-            <img
-              src={logoSrc}
-              alt={logoAlt}
-              className="block h-9 w-auto"
-              onError={() => setLogoFailed(true)}
-            />
+    <header
+      ref={wrapperRef}
+      className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/65"
+    >
+      <div className="mx-auto grid h-16 max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="inline-flex items-center overflow-visible" aria-label={content.brand.name}>
+          {logoAvailable ? (
+            <span className="inline-block origin-left scale-[2]">
+              <img
+                src={logoSrc}
+                alt={logoAlt}
+                className="h-9 w-auto"
+                onError={() => setFailedLogoSrc(logoSrc ?? null)}
+              />
+            </span>
           ) : (
             <span className="inline-flex items-center gap-2">
               <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-slate-950 text-sm font-semibold text-white">
@@ -184,7 +164,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
                       onFocus={() => setOpenDesktopIndex(index)}
                       onKeyDown={(event) => handleDesktopKeyDown(event, index)}
                       className={cn(
-                        "border-b-2 border-transparent px-0.5 py-2 text-sm font-medium transition-colors",
+                        "inline-flex min-h-[44px] items-center border-b-2 border-transparent px-0.5 py-0 text-sm font-medium leading-none transition-colors",
                         isOpen
                           ? "border-slate-900 text-slate-950"
                           : "text-slate-900 hover:border-slate-900 hover:text-slate-950",
@@ -195,7 +175,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
                   ) : (
                     <Link
                       href={getNavHref(item)}
-                      className="border-b-2 border-transparent px-0.5 py-2 text-sm font-medium text-slate-900 transition-colors hover:border-slate-900 hover:text-slate-950"
+                      className="inline-flex min-h-[44px] items-center border-b-2 border-transparent px-0.5 py-0 text-sm font-medium text-slate-900 leading-none transition-colors hover:border-slate-900 hover:text-slate-950"
                     >
                       {item.label}
                     </Link>
@@ -215,24 +195,6 @@ export function Header({ content = milemendContent }: HeaderProps) {
         >
           Menu
         </button>
-      </div>
-
-      <div className="hidden border-y border-slate-200/80 bg-[linear-gradient(90deg,#E9FFF0_0%,#FFF8F4_50%,#FFD8D2_100%)] lg:block">
-        <div className="mx-auto flex max-w-7xl justify-end px-4 py-2 sm:px-6 lg:px-8">
-          <ul className="flex items-center text-sm text-slate-700">
-            {content.utilityLinks.map((link, index) => (
-              <li key={link.label} className="flex items-center">
-                {index > 0 ? <span className="mx-4 h-4 w-px bg-slate-300/70" aria-hidden /> : null}
-                <Link
-                  href={link.href}
-                  className="rounded-sm transition hover:text-slate-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
 
       {openDesktopIndex !== null && desktopNav[openDesktopIndex]?.megaMenu ? (

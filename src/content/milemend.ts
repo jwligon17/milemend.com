@@ -72,6 +72,7 @@ export type MilemendContent = {
     };
     hero: {
       headline: string;
+      supportingLine?: string;
       subheadline: string;
       bullets: string[];
       primaryCta: ContentCta;
@@ -79,6 +80,7 @@ export type MilemendContent = {
       image?: {
         src: string;
         alt: string;
+        variant?: "phone" | "photo";
       };
       heroVisual: {
         metricCard: {
@@ -116,12 +118,6 @@ export type MilemendContent = {
         description: string;
       }[];
       roadmapNote: string;
-    };
-    leadershipSection: {
-      eyebrow?: string;
-      title: string;
-      bullets: string[];
-      includeFinanceGrants?: boolean;
     };
     modules: {
       eyebrow: string;
@@ -284,6 +280,10 @@ export const milemendContent: MilemendContent = {
       label: "Contact",
       href: "/contact",
     },
+    {
+      label: "FAQ",
+      href: "/resources/faq",
+    },
   ],
   footer: {
     links: [
@@ -312,7 +312,9 @@ export const milemendContent: MilemendContent = {
       },
     },
     hero: {
-      headline: "Know road condition for every mile with Milemend.",
+      headline: "Know every mile.",
+      supportingLine:
+        "Cities often lack consistent, network-wide visibility into road conditions and how fast issues are changing. MileMend helps Public Works teams build clearer prioritization with shareable rationale.",
       subheadline:
         "Coordinate requests, crews, assets, and reporting with a single platform designed for public works.",
       bullets: [
@@ -325,8 +327,9 @@ export const milemendContent: MilemendContent = {
         href: "/contact",
       },
       image: {
-        src: "/hero-photo.jpg",
-        alt: "Person typing on a laptop",
+        src: "/hero-phone.png",
+        alt: "Milemend mobile app preview",
+        variant: "phone",
       },
       heroVisual: {
         metricCard: {
@@ -400,15 +403,6 @@ export const milemendContent: MilemendContent = {
       ],
       roadmapNote:
         "Integrations with existing systems are part of the roadmap — we start with lightweight exports.",
-    },
-    leadershipSection: {
-      eyebrow: "LEADERSHIP",
-      title: "Built for Public Works leadership",
-      bullets: [
-        "Public Works Director: prioritization + reporting",
-        "City Engineer: condition trends + project justification",
-        "Finance/Grants: budget narrative + defensible documentation",
-      ],
     },
     modules: {
       eyebrow: "Capabilities",

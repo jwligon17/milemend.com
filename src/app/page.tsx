@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { CoreCapabilitiesSection } from "@/components/sections/CoreCapabilitiesSection";
 import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { LeadershipSection } from "@/components/sections/LeadershipSection";
 import { WhatYouGetSection } from "@/components/sections/WhatYouGetSection";
 import { milemendContent } from "@/content/milemend";
 
@@ -21,7 +20,6 @@ export default function Home() {
       <HeroSection hero={homePage.hero} />
       <WhatYouGetSection whatYouGet={homePage.whatYouGet} />
       <CoreCapabilitiesSection coreCapabilities={homePage.coreCapabilities} />
-      <LeadershipSection leadershipSection={homePage.leadershipSection} />
       <FinalCtaSection finalCta={homePage.finalCTA} />
     </>
   );
