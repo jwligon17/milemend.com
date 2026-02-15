@@ -128,10 +128,10 @@ export function Header({ content = milemendContent }: HeaderProps) {
             </span>
           ) : (
             <span className="inline-flex items-center gap-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-slate-950 text-sm font-semibold text-white">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-slate-950 text-sm font-bold text-white">
                 MM
               </span>
-              <span className="text-lg font-semibold tracking-tight text-slate-950">
+              <span className="text-lg font-bold tracking-tight text-slate-950">
                 {content.brand.name}
               </span>
             </span>
@@ -164,7 +164,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
                       onFocus={() => setOpenDesktopIndex(index)}
                       onKeyDown={(event) => handleDesktopKeyDown(event, index)}
                       className={cn(
-                        "inline-flex min-h-[44px] items-center border-b-2 border-transparent px-0.5 py-0 text-sm font-medium leading-none transition-colors",
+                        "inline-flex min-h-[44px] items-center border-b-2 border-transparent px-0.5 py-0 text-sm font-normal leading-none transition-colors",
                         isOpen
                           ? "border-slate-900 text-slate-950"
                           : "text-slate-900 hover:border-slate-900 hover:text-slate-950",
@@ -175,7 +175,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
                   ) : (
                     <Link
                       href={getNavHref(item)}
-                      className="inline-flex min-h-[44px] items-center border-b-2 border-transparent px-0.5 py-0 text-sm font-medium text-slate-900 leading-none transition-colors hover:border-slate-900 hover:text-slate-950"
+                      className="inline-flex min-h-[44px] items-center border-b-2 border-transparent px-0.5 py-0 text-sm font-normal text-slate-900 leading-none transition-colors hover:border-slate-900 hover:text-slate-950"
                     >
                       {item.label}
                     </Link>
@@ -191,7 +191,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav-drawer"
           onClick={() => setMobileOpen((value) => !value)}
-          className="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-800 lg:hidden"
+          className="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-normal text-slate-800 lg:hidden"
         >
           Menu
         </button>
@@ -214,7 +214,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
           >
             {desktopNav[openDesktopIndex].megaMenu!.groups.map((group) => (
               <div key={group.title}>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-cyan-800">
+                <p className="mb-3 text-xs font-bold uppercase tracking-wider text-cyan-800">
                   {group.title}
                 </p>
                 <ul className="space-y-1">
@@ -225,7 +225,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
                         className="block rounded-md px-2 py-2 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-700"
                         onClick={() => setOpenDesktopIndex(null)}
                       >
-                        <p className="text-sm font-semibold text-slate-900">{link.label}</p>
+                        <p className="text-sm font-bold text-slate-900">{link.label}</p>
                         {link.description ? (
                           <p className="mt-0.5 text-sm text-slate-600">{link.description}</p>
                         ) : null}
@@ -254,7 +254,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
             aria-label="Mobile navigation"
           >
             <div className="mb-6 flex items-center justify-between">
-              <p className="text-sm font-semibold text-slate-900">{content.brand.name}</p>
+              <p className="text-sm font-bold text-slate-900">{content.brand.name}</p>
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
@@ -275,7 +275,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
                     <li key={item.label}>
                       <Link
                         href={getNavHref(item)}
-                        className="block rounded-md border border-slate-200 px-4 py-3 text-sm font-medium text-slate-800"
+                        className="block rounded-md border border-slate-200 px-4 py-3 text-sm font-normal text-slate-800"
                         onClick={() => setMobileOpen(false)}
                       >
                         {item.label}
@@ -291,7 +291,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
                       aria-expanded={isOpen}
                       aria-controls={accordionId}
                       onClick={() => setOpenMobileIndex(isOpen ? null : index)}
-                      className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold text-slate-900"
+                      className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-bold text-slate-900"
                     >
                       <span>{item.label}</span>
                       <span aria-hidden>{isOpen ? "−" : "+"}</span>
@@ -301,7 +301,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
                       <div id={accordionId} className="space-y-4 px-4 pb-4">
                         {groups.map((group) => (
                           <div key={group.title}>
-                            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-cyan-800">
+                            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-cyan-800">
                               {group.title}
                             </p>
                             <ul className="space-y-1">

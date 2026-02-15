@@ -26,14 +26,14 @@ export function ResourcesLibrary({ resources, initialCategory }: ResourcesLibrar
   return (
     <>
       <div className="mt-8">
-        <p className="mb-3 text-sm font-semibold text-slate-700">{resources.filterLabel}</p>
+        <p className="mb-3 text-sm font-bold text-slate-700">{resources.filterLabel}</p>
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
             onClick={() => setActiveCategory(resources.allFilterLabel)}
             className={
               activeCategory === resources.allFilterLabel
-                ? "rounded-md bg-slate-900 px-3 py-1.5 text-sm font-semibold text-white"
+                ? "rounded-md bg-slate-900 px-3 py-1.5 text-sm font-bold text-white"
                 : "rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-700"
             }
           >
@@ -46,7 +46,7 @@ export function ResourcesLibrary({ resources, initialCategory }: ResourcesLibrar
               onClick={() => setActiveCategory(category)}
               className={
                 activeCategory === category
-                  ? "rounded-md bg-slate-900 px-3 py-1.5 text-sm font-semibold text-white"
+                  ? "rounded-md bg-slate-900 px-3 py-1.5 text-sm font-bold text-white"
                   : "rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-700"
               }
             >
@@ -60,15 +60,15 @@ export function ResourcesLibrary({ resources, initialCategory }: ResourcesLibrar
         {filteredResources.map((resource) => (
           <Card key={resource.slug} className="flex h-full flex-col justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-cyan-800">
+              <p className="text-xs font-bold uppercase tracking-wider text-cyan-800">
                 {resource.category}
               </p>
-              <h2 className="mt-2 text-lg font-semibold text-slate-900">{resource.title}</h2>
+              <h2 className="mt-2 text-lg font-bold text-slate-900">{resource.title}</h2>
               <p className="mt-2 text-sm text-slate-600">{resource.summary}</p>
             </div>
             <Link
               href={resource.href}
-              className="mt-6 inline-flex text-sm font-semibold text-slate-900 underline decoration-slate-300 underline-offset-4 transition hover:decoration-slate-900"
+              className="mt-6 inline-flex text-sm font-bold text-slate-900 underline decoration-slate-300 underline-offset-4 transition hover:decoration-slate-900"
             >
               {resources.cardLinkLabel}
             </Link>

@@ -1,50 +1,30 @@
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
+
 import { Container } from "@/components/ui/Container";
-import type { MilemendContent } from "@/content/milemend";
+import { milemendContent, type MilemendContent } from "@/content/milemend";
 
 type FinalCtaSectionProps = {
   finalCta: MilemendContent["homePage"]["finalCTA"];
 };
 
 export function FinalCtaSection({ finalCta }: FinalCtaSectionProps) {
-  const secondaryIsPdf = finalCta.secondaryCta.href.toLowerCase().endsWith(".pdf");
+  const contactHref =
+    milemendContent.mainNav.find((item) => item.label === "Contact")?.href ?? finalCta.primaryCta.href;
 
   return (
-    <section className="py-16" id="platform-overview">
+    <section className="flex min-h-[35vh] items-start justify-center pt-[2.75rem] pb-16" id="platform-overview">
       <Container>
-        <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm sm:p-10">
-          <h2 className="text-balance text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
-            {finalCta.headline}
+        <div className="flex flex-col items-center justify-center gap-4">
+          <h2 className="text-center text-2xl font-bold text-slate-900">
+            Ready to modernize roadway operations?
           </h2>
-          <p className="mt-4 text-slate-600">{finalCta.supportingText}</p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Button href={finalCta.primaryCta.href} size="lg">
-              {finalCta.primaryCta.label}
-            </Button>
-            <Button
-              href={finalCta.secondaryCta.href}
-              size="lg"
-              variant="secondary"
-              aria-label="Download Capabilities Statement PDF"
-              download={secondaryIsPdf ? "Milemend-Capabilities-Statement.pdf" : undefined}
+          <div className="mt-2 md:mt-4">
+            <Link
+              href={contactHref}
+              className="inline-flex items-center justify-center rounded-md bg-slate-900 px-5 py-3 text-base font-bold text-white transition hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700"
             >
-              <svg
-                aria-hidden="true"
-                className="mr-2 h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 4V14M12 14L8 10M12 14L16 10M5 18H19"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              {finalCta.secondaryCta.label}
-            </Button>
+              Request a Demo
+            </Link>
           </div>
         </div>
       </Container>

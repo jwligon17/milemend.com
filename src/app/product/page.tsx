@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
+import { EKGLine } from "@/components/ekg/EKGLine";
+import { ProductGuidanceSection } from "@/components/sections/ProductGuidanceSection";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
   title: "Product",
@@ -14,41 +15,62 @@ export default function ProductPage() {
   return (
     <section className="py-16">
       <Container>
-        <SectionHeading
-          eyebrow="Product"
-          title="Milemend Product"
-          description="A practical overview of how teams can evaluate and adopt Milemend."
-          titleAs="h1"
-        />
+        <header className="max-w-3xl">
+          <h1 className="text-4xl font-bold leading-[1.05] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage: "linear-gradient(180deg, #0B0F19 0%, #6B7280 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Road Health Matters
+            </span>
+          </h1>
+          <p className="mt-3 text-pretty text-base text-slate-600">
+            Our data collection process gets timely information that your municipality can use to make the right
+            decision at the right time.
+          </p>
+        </header>
+      </Container>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          <Card>
-            <h2 className="text-lg font-semibold text-slate-900">Overview</h2>
-            <p className="mt-2 text-sm text-slate-600">
-              Milemend provides workflow components for planning, tracking, and reporting maintenance activities.
-            </p>
-            <p className="mt-2 text-sm text-slate-500">
-              Scope details are tailored during evaluation based on team workflows and implementation priorities.
-            </p>
-          </Card>
-          <Card>
-            <h2 className="text-lg font-semibold text-slate-900">How it works</h2>
-            <p className="mt-2 text-sm text-slate-600">
-              Teams configure intake, triage, field updates, and reporting views based on local process needs.
-            </p>
-            <p className="mt-2 text-sm text-slate-500">
-              Implementation follows a phased rollout with configuration, onboarding, and operating review checkpoints.
-            </p>
-          </Card>
-          <Card>
-            <h2 className="text-lg font-semibold text-slate-900">What you get</h2>
-            <p className="mt-2 text-sm text-slate-600">
-              Shared visibility across stakeholders, structured records, and export-ready reporting outputs.
-            </p>
-            <p className="mt-2 text-sm text-slate-500">
-              Feature details are documented for each deployment during implementation planning.
-            </p>
-          </Card>
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-x-hidden">
+        <EKGLine />
+      </div>
+
+      <Container>
+        <div className="py-16">
+          <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
+            <div className="grid items-center gap-y-12 md:grid-cols-2 md:gap-x-16 lg:gap-x-20">
+              <div className="flex justify-center md:justify-end w-[220px] sm:w-[240px] md:w-[280px] lg:w-[300px]">
+                <Image
+                  src="/productphone.png"
+                  alt="Milemend product interface on mobile"
+                  width={520}
+                  height={940}
+                  className="w-full h-auto object-contain"
+                  sizes="(min-width: 1024px) 300px, (min-width: 768px) 280px, 240px"
+                  priority
+                />
+              </div>
+              <div className="w-full text-right md:justify-self-end">
+                <div className="ml-auto max-w-[640px]">
+                  <h2 className="font-bold tracking-tight leading-[1.05] text-5xl md:text-6xl lg:text-6xl text-black">
+                    Better Data,<br className="hidden md:block" /> Better Decisions
+                  </h2>
+                  <div className="ml-auto mt-8 max-w-[560px] space-y-6 text-base md:text-lg text-slate-600">
+                    <p>Our team believes the best decisions are derived from a few characteristics of data.</p>
+                    <p className="font-semibold text-slate-800">Density, quality, and timeliness.</p>
+                    <p>
+                      Our system is designed to give your municipality access to the data you need in a constituent
+                      supportive, and action defensible process.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="mt-10">
@@ -57,6 +79,8 @@ export default function ProductPage() {
           </Button>
         </div>
       </Container>
+
+      <ProductGuidanceSection />
     </section>
   );
 }

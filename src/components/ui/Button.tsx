@@ -27,7 +27,7 @@ function cn(...classes: Array<string | undefined | false>) {
 }
 
 const baseClasses =
-  "inline-flex items-center justify-center rounded-md font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex items-center justify-center rounded-md font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 disabled:cursor-not-allowed disabled:opacity-50";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-slate-900 text-white hover:bg-slate-700",

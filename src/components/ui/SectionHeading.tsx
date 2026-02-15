@@ -30,9 +30,9 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-800">{eyebrow}</p>
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-800">{eyebrow}</p>
       ) : null}
-      <HeadingTag className="mt-2 text-balance text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
+      <HeadingTag className="mt-2 text-balance text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
         {title}
       </HeadingTag>
       {description ? <p className="mt-3 text-pretty text-base text-slate-600">{description}</p> : null}

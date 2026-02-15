@@ -22,13 +22,13 @@ export default function AboutPage() {
 
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
           <Card>
-            <h2 className="text-xl font-semibold text-slate-900">Mission</h2>
+            <h2 className="text-xl font-bold text-slate-900">Mission</h2>
             <p className="mt-3 text-sm text-slate-600">
               Build useful tools that help teams plan work clearly, coordinate responsibilities, and communicate progress.
             </p>
           </Card>
           <Card>
-            <h2 className="text-xl font-semibold text-slate-900">Values</h2>
+            <h2 className="text-xl font-bold text-slate-900">Values</h2>
             <p className="mt-3 text-sm text-slate-600">
               Clarity, accountability, and steady iteration guide how the product and customer workflows evolve.
             </p>
@@ -40,7 +40,7 @@ export default function AboutPage() {
 
         <div className="mt-10">
           <Card>
-            <h2 className="text-xl font-semibold text-slate-900">Our story</h2>
+            <h2 className="text-xl font-bold text-slate-900">Our story</h2>
             <p className="mt-3 text-sm text-slate-600">
               Milemend started from a simple need: reduce friction between incoming requests, field execution, and reporting.
               The team continues to refine the product with implementation feedback and practical constraints in mind.

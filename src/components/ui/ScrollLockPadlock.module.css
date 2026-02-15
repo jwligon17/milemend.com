@@ -1,0 +1,73 @@
+.wrapper {
+  position: fixed;
+  top: 50%;
+  right: 16px;
+  z-index: 45;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 300ms ease, transform 300ms ease;
+  will-change: opacity, transform;
+}
+
+.svg {
+  display: block;
+  width: 84px;
+  height: 84px;
+}
+
+.body {
+  fill: #e2e8f0;
+  stroke: #334155;
+  stroke-width: 3;
+  transition: fill 220ms ease, stroke 220ms ease;
+}
+
+.keyhole {
+  fill: #334155;
+}
+
+.shackle {
+  fill: none;
+  stroke: #334155;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 300ms ease, stroke 220ms ease;
+}
+
+.locked .body {
+  fill: #22c55e;
+}
+
+.locked .shackle {
+  stroke: #166534;
+}
+
+.reducedMotion {
+  transition: none;
+}
+
+.reducedMotion .body,
+.reducedMotion .shackle {
+  transition: none;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    right: 10px;
+  }
+
+  .svg {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapper,
+  .body,
+  .shackle {
+    transition: none;
+  }
+}

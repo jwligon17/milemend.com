@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import "./globals.css";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-poppins",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://milemend.com"),
@@ -41,11 +48,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-white text-slate-900 antialiased">
+    <html lang="en" className={`${poppins.variable} ${poppins.className}`}>
+      <body className="min-h-screen bg-white text-slate-900 antialiased font-sans">
         <a
           href="#main-content"
-          className="sr-only rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
+          className="sr-only rounded-md bg-slate-900 px-3 py-2 text-sm font-bold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
         >
           Skip to main content
         </a>

@@ -26,11 +26,11 @@ export default function AboutPage() {
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <Card>
-            <h2 className="text-xl font-semibold text-slate-900">{companyAboutPage.mission.title}</h2>
+            <h2 className="text-xl font-bold text-slate-900">{companyAboutPage.mission.title}</h2>
             <p className="mt-3 text-sm text-slate-600">{companyAboutPage.mission.body}</p>
           </Card>
           <Card>
-            <h2 className="text-xl font-semibold text-slate-900">{companyAboutPage.whyMileMend.title}</h2>
+            <h2 className="text-xl font-bold text-slate-900">{companyAboutPage.whyMileMend.title}</h2>
             <p className="mt-3 text-sm text-slate-600">{companyAboutPage.whyMileMend.body}</p>
           </Card>
         </div>
@@ -40,7 +40,7 @@ export default function AboutPage() {
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {companyAboutPage.values.items.map((value) => (
               <Card key={value.title}>
-                <h3 className="text-lg font-semibold text-slate-900">{value.title}</h3>
+                <h3 className="text-lg font-bold text-slate-900">{value.title}</h3>
                 <p className="mt-2 text-sm text-slate-600">{value.description}</p>
               </Card>
             ))}
@@ -52,7 +52,7 @@ export default function AboutPage() {
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {companyAboutPage.howItWorks.steps.map((step) => (
               <Card key={step.title}>
-                <h3 className="text-lg font-semibold text-slate-900">{step.title}</h3>
+                <h3 className="text-lg font-bold text-slate-900">{step.title}</h3>
                 <p className="mt-2 text-sm text-slate-600">{step.description}</p>
               </Card>
             ))}

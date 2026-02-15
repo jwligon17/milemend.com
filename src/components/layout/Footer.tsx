@@ -13,12 +13,14 @@ export function Footer({ content = milemendContent }: FooterProps) {
   const hasEmail = footer.contact.email.trim().length > 0;
   const hasLocation = footer.contact.location.trim().length > 0;
   const hasPhone = footer.contact.phone.trim().length > 0;
+  const footerLinkClass =
+    "text-[#30ff05] visited:text-[#30ff05] transition-colors hover:text-[#30ff05] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#30ff05]";
 
   return (
     <footer className="bg-slate-950 text-slate-100">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_2fr] lg:px-8">
         <section aria-label={`${content.brand.name} overview`}>
-          <p className="text-lg font-semibold">{content.brand.name}</p>
+          <p className="text-lg font-bold">{content.brand.name}</p>
           <p className="mt-3 text-sm text-slate-300">{content.brand.shortDescription}</p>
           {hasEmail || hasLocation || hasPhone ? (
             <ul className="mt-6 space-y-2 text-sm text-slate-300">
@@ -26,7 +28,7 @@ export function Footer({ content = milemendContent }: FooterProps) {
                 <li>
                   <a
                     href={`mailto:${footer.contact.email}`}
-                    className="text-emerald-300 transition hover:text-emerald-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                    className={footerLinkClass}
                   >
                     {footer.contact.email}
                   </a>
@@ -37,7 +39,7 @@ export function Footer({ content = milemendContent }: FooterProps) {
                 <li>
                   <a
                     href={`tel:${footer.contact.phone}`}
-                    className="text-emerald-300 transition hover:text-emerald-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                    className={footerLinkClass}
                   >
                     {footer.contact.phone}
                   </a>
@@ -53,7 +55,7 @@ export function Footer({ content = milemendContent }: FooterProps) {
               <li key={link.label}>
                 <Link
                   href={link.href}
-                  className="text-sm text-emerald-300 transition hover:text-emerald-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                  className={`text-sm ${footerLinkClass}`}
                 >
                   {link.label}
                 </Link>
@@ -72,7 +74,7 @@ export function Footer({ content = milemendContent }: FooterProps) {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-emerald-300 transition hover:text-emerald-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300"
+                    className={footerLinkClass}
                   >
                     {link.label}
                   </Link>

@@ -1,0 +1,65 @@
+.root {
+  position: relative;
+  margin-top: 1.5rem;
+  height: 120px;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+@media (min-width: 640px) {
+  .root {
+    height: 160px;
+  }
+}
+
+.svg {
+  height: 100%;
+  width: 100%;
+}
+
+.baselineGlow {
+  opacity: 0.32;
+}
+
+.spikeBase {
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  opacity: 0;
+}
+
+.spikeDraw {
+  animation:
+    ekgDraw var(--draw-ms) ease-out forwards,
+    ekgFade var(--fade-ms) ease-out forwards var(--draw-ms);
+}
+
+.spikeInstant {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+.writeHead {
+  pointer-events: none;
+}
+
+@keyframes ekgDraw {
+  from {
+    stroke-dashoffset: var(--dash-len);
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ekgFade {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

@@ -57,7 +57,7 @@ export function ContactForm() {
   if (submitted) {
     return (
       <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-        <h1 className="text-3xl font-semibold text-slate-950">{contactPage.form.successTitle}</h1>
+        <h1 className="text-3xl font-bold text-slate-950">{contactPage.form.successTitle}</h1>
         <p className="mx-auto mt-3 text-sm text-slate-600">{contactPage.form.successBody}</p>
         <div className="mt-6">
           <Button variant="secondary" onClick={() => setSubmitted(false)}>
@@ -75,7 +75,7 @@ export function ContactForm() {
       className="mt-8 space-y-5 rounded-2xl border border-slate-200 bg-white p-8 shadow-sm"
     >
       <div>
-        <label htmlFor="name" className="text-sm font-semibold text-slate-800">
+        <label htmlFor="name" className="text-sm font-bold text-slate-800">
           {contactPage.form.fields.name}
         </label>
         <input
@@ -89,7 +89,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="text-sm font-semibold text-slate-800">
+        <label htmlFor="email" className="text-sm font-bold text-slate-800">
           {contactPage.form.fields.email}
         </label>
         <input
@@ -103,7 +103,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="org" className="text-sm font-semibold text-slate-800">
+        <label htmlFor="org" className="text-sm font-bold text-slate-800">
           {contactPage.form.fields.org}
         </label>
         <input
@@ -117,7 +117,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="text-sm font-semibold text-slate-800">
+        <label htmlFor="message" className="text-sm font-bold text-slate-800">
           {contactPage.form.fields.message}
         </label>
         <textarea

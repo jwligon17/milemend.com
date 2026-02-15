@@ -361,7 +361,7 @@ export const milemendContent: MilemendContent = {
       ],
     },
     whatYouGet: {
-      title: "What you get",
+      title: "Actionable, Defensible Data",
       items: [
         {
           title: "Condition coverage + recency snapshot",

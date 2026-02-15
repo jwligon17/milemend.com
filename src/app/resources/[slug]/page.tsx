@@ -39,8 +39,8 @@ export default async function ResourceDetailPage({ params }: ResourceDetailPageP
   return (
     <section className="py-16">
       <Container className="max-w-4xl">
-        <p className="text-xs font-semibold uppercase tracking-wider text-cyan-800">{resource.category}</p>
-        <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight text-slate-950">
+        <p className="text-xs font-bold uppercase tracking-wider text-cyan-800">{resource.category}</p>
+        <h1 className="mt-3 text-balance text-4xl font-bold tracking-tight text-slate-950">
           {resource.title}
         </h1>
         <p className="mt-4 text-lg text-slate-600">{resource.summary}</p>
@@ -55,7 +55,7 @@ export default async function ResourceDetailPage({ params }: ResourceDetailPageP
 
         <Link
           href="/resources"
-          className="mt-8 inline-flex text-sm font-semibold text-slate-900 underline decoration-slate-300 underline-offset-4 transition hover:decoration-slate-900"
+          className="mt-8 inline-flex text-sm font-bold text-slate-900 underline decoration-slate-300 underline-offset-4 transition hover:decoration-slate-900"
         >
           Back to resources
         </Link>

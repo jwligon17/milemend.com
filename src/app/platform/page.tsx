@@ -33,7 +33,7 @@ export default function PlatformPage() {
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {homePage.coreCapabilities.cards.map((card) => (
               <Card key={card.title}>
-                <h3 className="text-lg font-semibold text-slate-900">{card.title}</h3>
+                <h3 className="text-lg font-bold text-slate-900">{card.title}</h3>
                 <p className="mt-2 text-sm text-slate-600">{card.description}</p>
               </Card>
             ))}
@@ -51,7 +51,7 @@ export default function PlatformPage() {
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {platformPage.integrationsTeaser.links.map((link) => (
               <Card key={link.label}>
-                <h3 className="text-lg font-semibold text-slate-900">{link.label}</h3>
+                <h3 className="text-lg font-bold text-slate-900">{link.label}</h3>
                 <p className="mt-2 text-sm text-slate-600">{link.description}</p>
               </Card>
             ))}

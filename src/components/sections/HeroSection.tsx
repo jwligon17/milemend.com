@@ -65,16 +65,16 @@ export function HeroSection({ hero }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-x-hidden border-b border-slate-200/80 bg-white pt-1 pb-2 sm:pt-2 sm:pb-3 lg:pt-2 lg:pb-3"
+      className="relative border-b border-slate-200/80 bg-white pt-1 pb-2 sm:pt-2 sm:pb-3 lg:pt-2 lg:pb-3"
     >
       <div
         className="pointer-events-none absolute inset-y-0 left-[45%] right-0 hidden bg-gradient-to-r from-mint via-cream to-blush opacity-55 blur-2xl lg:block"
         aria-hidden
       />
       <Container className="relative">
-        <div className="grid gap-4 sm:gap-5 lg:grid-cols-2 lg:items-center lg:translate-x-10 xl:translate-x-12">
-          <div className="max-w-xl">
-            <h1 className="text-shadow-soft text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl">
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:translate-x-10 xl:translate-x-12">
+          <div className="max-w-xl lg:max-w-2xl">
+            <h1 className="text-shadow-soft text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl lg:whitespace-nowrap">
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -131,12 +131,12 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
                 <div ref={mpciWrapRef} className="absolute -top-6 -right-6 z-20">
                   <article className="translate-y-full w-48 rounded-xl border border-slate-200 bg-white p-4 shadow-lg">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
                       {hero.heroVisual.metricCard.label}
                     </p>
                     <div className="mt-1 flex items-end justify-between gap-3">
-                      <p className="text-3xl font-semibold leading-none text-slate-900">{hero.heroVisual.metricCard.value}</p>
-                      <p className="mt-2 flex items-center gap-1 text-xs font-medium text-forest opacity-100 blur-0 filter-none">
+                      <p className="text-3xl font-bold leading-none text-slate-900">{hero.heroVisual.metricCard.value}</p>
+                      <p className="mt-2 flex items-center gap-1 text-xs font-normal text-forest opacity-100 blur-0 filter-none">
                         <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" aria-hidden>
                           <path
                             d="M3 13l5-5 4 4 5-6M14 6h3v3"
@@ -156,18 +156,18 @@ export function HeroSection({ hero }: HeroSectionProps) {
                 </div>
 
                 <div ref={tableWrapRef} className="absolute -bottom-6 -left-6 z-20">
-                  <article className="-translate-y-1/2 w-[92%] max-w-xs rounded-xl border border-slate-200 bg-white p-4 shadow-lg">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-600">
+                  <article className="-translate-y-1/2 w-[92%] max-w-xs pointer-events-none rounded-xl border border-slate-200 bg-white p-4 shadow-lg">
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-600">
                       {hero.heroVisual.miniTable.title}
                     </p>
-                    <div className="no-scrollbar mt-3 overflow-x-auto">
+                    <div className="mt-3 overflow-x-auto overflow-y-hidden">
                       <table className="table-fixed w-full text-left text-[10px] leading-tight text-slate-700">
                         <thead>
                           <tr>
                             {hero.heroVisual.miniTable.columns.map((column) => (
                               <th
                                 key={column}
-                                className="truncate whitespace-nowrap border-b border-slate-200 pb-1 pr-2 font-semibold"
+                                className="truncate whitespace-nowrap border-b border-slate-200 pb-1 pr-2 font-bold"
                               >
                                 {column}
                               </th>
@@ -209,12 +209,12 @@ export function HeroSection({ hero }: HeroSectionProps) {
                 </div>
 
                 <article className="absolute -top-6 right-0 w-44 rounded-xl bg-white p-3.5 shadow-lg ring-1 ring-slate-200/70 sm:w-48">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
                     {hero.heroVisual.metricCard.label}
                   </p>
                   <div className="mt-1 flex items-end justify-between gap-3">
-                    <p className="text-3xl font-semibold leading-none text-slate-900">{hero.heroVisual.metricCard.value}</p>
-                    <p className="mt-2 flex items-center gap-1 text-xs font-medium text-forest opacity-100 blur-0 filter-none">
+                    <p className="text-3xl font-bold leading-none text-slate-900">{hero.heroVisual.metricCard.value}</p>
+                    <p className="mt-2 flex items-center gap-1 text-xs font-normal text-forest opacity-100 blur-0 filter-none">
                       <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" aria-hidden>
                         <path
                           d="M3 13l5-5 4 4 5-6M14 6h3v3"
@@ -232,18 +232,18 @@ export function HeroSection({ hero }: HeroSectionProps) {
                   </div>
                 </article>
 
-                <article className="absolute -bottom-6 left-6 -translate-y-1/2 w-72 rounded-2xl bg-white p-4 shadow-lg ring-1 ring-slate-200/70">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-600">
+                <article className="absolute -bottom-6 left-6 -translate-y-1/2 w-72 pointer-events-none rounded-2xl bg-white p-4 shadow-lg ring-1 ring-slate-200/70">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-600">
                     {hero.heroVisual.miniTable.title}
                   </p>
-                  <div className="no-scrollbar mt-3 overflow-x-auto">
+                  <div className="mt-3 overflow-x-auto overflow-y-hidden">
                     <table className="table-fixed w-full text-left text-[10px] leading-tight text-slate-700">
                       <thead>
                         <tr>
                           {hero.heroVisual.miniTable.columns.map((column) => (
                             <th
                               key={column}
-                              className="truncate whitespace-nowrap border-b border-slate-200 pb-1 pr-2 font-semibold"
+                              className="truncate whitespace-nowrap border-b border-slate-200 pb-1 pr-2 font-bold"
                             >
                               {column}
                             </th>
