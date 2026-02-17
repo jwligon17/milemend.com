@@ -72,7 +72,7 @@ export default function ProductPageClient() {
   }, []);
 
   return (
-    <section className="pt-16">
+    <section className="overflow-x-hidden lg:overflow-x-visible pt-10 sm:pt-12 lg:pt-16">
       <Container>
         <header className="max-w-3xl">
           <h1 className="section-h1">
@@ -86,14 +86,14 @@ export default function ProductPageClient() {
       </Container>
 
       <div className="pointer-events-none relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-x-hidden">
-        <EKGMonitor ref={ekgRef} className="pointer-events-none" height={152} />
+        <EKGMonitor ref={ekgRef} className="pointer-events-none h-[90px] sm:h-[104px] lg:h-[152px]" />
       </div>
 
       <Container>
-        <div className="py-16">
-          <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
-            <div className="grid items-center gap-y-12 md:grid-cols-2 md:gap-x-16 lg:gap-x-20">
-              <div className="flex justify-center md:justify-end w-[220px] sm:w-[240px] md:w-[280px] lg:w-[300px]">
+        <div className="py-10 sm:py-12 lg:py-16">
+          <div className="mx-auto w-full max-w-6xl px-0 lg:px-10">
+            <div className="grid grid-cols-1 items-center gap-y-10 sm:gap-y-12 lg:grid-cols-2 lg:gap-x-20">
+              <div className="mx-auto flex w-[220px] justify-center sm:w-[240px] md:w-[280px] lg:mx-0 lg:w-[300px] lg:justify-end">
                 <Image
                   src="/productphone.png"
                   alt="Milemend product interface on mobile"
@@ -104,12 +104,12 @@ export default function ProductPageClient() {
                   priority
                 />
               </div>
-              <div className="w-full text-right md:justify-self-end">
-                <div className="ml-auto max-w-[640px]">
+              <div className="w-full text-left lg:justify-self-end lg:text-right">
+                <div className="mx-auto max-w-[640px] lg:ml-auto lg:mr-0">
                   <h2 className="section-h1">
-                    Better Data,<br className="hidden md:block" /> Better Decisions
+                    Better Data,<br className="hidden lg:block" /> Better Decisions
                   </h2>
-                  <div className="ml-auto mt-8 max-w-[560px] space-y-6 text-base md:text-lg text-slate-600">
+                  <div className="ml-auto mt-6 max-w-[560px] space-y-4 text-base text-slate-600 sm:mt-8 sm:space-y-6 md:text-lg">
                     <p>Our team believes the best decisions are derived from a few characteristics of data.</p>
                     <p className="font-semibold text-slate-800">Density, quality, and timeliness.</p>
                     <p>
@@ -128,7 +128,7 @@ export default function ProductPageClient() {
       <ProductGuidanceSection />
 
       <Container>
-        <div className="py-10 flex justify-center sm:py-12">
+        <div className="flex justify-center py-10 sm:py-12">
           <Button href="/contact" variant="ink" size="md" className="w-full sm:w-auto">
             Request a demo
           </Button>

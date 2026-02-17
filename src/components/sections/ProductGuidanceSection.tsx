@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 
 export function ProductGuidanceSection() {
   return (
-    <section className="overflow-x-hidden bg-white pt-16 pb-10 sm:pt-20 sm:pb-12">
+    <section className="overflow-x-hidden bg-white pt-10 pb-10 sm:pt-12 sm:pb-12 lg:pt-16">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)] lg:items-start lg:gap-20">
           <div>
@@ -47,7 +47,7 @@ export function ProductGuidanceSection() {
                 alt="MileMend dashboard on a laptop"
                 width={1600}
                 height={1000}
-                className="h-auto w-[min(900px,92vw)] max-w-none object-contain drop-shadow-[0_24px_40px_rgba(15,23,42,0.18)] lg:w-full"
+                className="mx-auto h-auto w-full max-w-[360px] object-contain drop-shadow-[0_24px_40px_rgba(15,23,42,0.18)] sm:max-w-[480px] lg:mx-0 lg:w-full lg:max-w-none"
                 sizes="(min-width: 1024px) 65vw, 100vw"
               />
             </div>

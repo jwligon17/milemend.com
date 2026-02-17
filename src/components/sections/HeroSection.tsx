@@ -65,14 +65,14 @@ export function HeroSection({ hero }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative border-b border-slate-200/80 bg-white pt-1 pb-2 sm:pt-2 sm:pb-3 lg:pt-2 lg:pb-3"
+      className="relative overflow-x-hidden lg:overflow-x-visible border-b border-slate-200/80 bg-white pt-1 pb-2 sm:pt-2 sm:pb-3 lg:pt-2 lg:pb-3"
     >
       <div
         className="pointer-events-none absolute inset-y-0 left-[45%] right-0 hidden bg-gradient-to-r from-mint via-cream to-blush opacity-55 blur-2xl lg:block"
         aria-hidden
       />
       <Container className="relative">
-        <div className="grid gap-4 sm:gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:translate-x-10 xl:translate-x-12">
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:translate-x-10 xl:translate-x-12">
           <div className="max-w-xl lg:max-w-2xl">
             <h1 className="text-shadow-soft text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl lg:whitespace-nowrap">
               <span
@@ -113,7 +113,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             />
 
             {isPhone ? (
-              <div className="relative mx-auto w-full max-w-sm lg:max-w-xs">
+              <div className="relative mx-auto w-full max-w-[320px] lg:max-w-xs">
                 <Image
                   src={heroImageSrc}
                   alt={heroImageAlt}
@@ -124,8 +124,8 @@ export function HeroSection({ hero }: HeroSectionProps) {
                   sizes="(min-width: 1024px) 22rem, (min-width: 640px) 28rem, 90vw"
                 />
 
-                <div ref={mpciWrapRef} className="absolute -top-6 -right-6 z-20">
-                  <article className="translate-y-full w-48 rounded-xl border border-slate-200 bg-white p-4 shadow-lg">
+                <div ref={mpciWrapRef} className="absolute top-2 right-1 z-20 sm:top-2 sm:right-0 lg:-top-6 lg:-right-6">
+                  <article className="translate-y-[72%] w-40 rounded-xl border border-slate-200 bg-white p-3 shadow-lg sm:translate-y-[85%] sm:w-44 sm:p-3.5 lg:translate-y-full lg:w-48 lg:p-4">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
                       {hero.heroVisual.metricCard.label}
                     </p>
@@ -150,8 +150,8 @@ export function HeroSection({ hero }: HeroSectionProps) {
                   </article>
                 </div>
 
-                <div ref={tableWrapRef} className="absolute -bottom-6 -left-6 z-20">
-                  <article className="-translate-y-1/2 w-[92%] max-w-xs pointer-events-none rounded-xl border border-slate-200 bg-white p-4 shadow-lg">
+                <div ref={tableWrapRef} className="absolute bottom-2 left-1 z-20 sm:bottom-0 sm:left-0 lg:-bottom-6 lg:-left-6">
+                  <article className="translate-y-0 w-[80%] max-w-[12.5rem] pointer-events-none rounded-xl border border-slate-200 bg-white p-3 shadow-lg sm:-translate-y-1/4 sm:w-[86%] sm:max-w-[14rem] sm:p-3.5 lg:-translate-y-1/2 lg:w-[92%] lg:max-w-xs lg:p-4">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-600">
                       {hero.heroVisual.miniTable.title}
                     </p>

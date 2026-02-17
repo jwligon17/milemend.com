@@ -101,7 +101,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="relative mt-8 space-y-5 overflow-visible rounded-2xl border border-slate-200 bg-white p-8 shadow-sm"
+      className="relative mt-6 w-full space-y-4 overflow-visible rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:mt-8 sm:space-y-5 sm:p-6 lg:p-8"
     >
       <div>
         <label htmlFor="contact-name" className="text-sm font-bold text-slate-800">
@@ -180,7 +180,13 @@ export function ContactForm() {
       ) : null}
 
       <div className="relative z-10 flex justify-start pt-2">
-        <Button type="submit" variant="ink" size="lg" className="shadow-sm" disabled={status === "sending"}>
+        <Button
+          type="submit"
+          variant="ink"
+          size="lg"
+          className="w-full shadow-sm sm:w-auto"
+          disabled={status === "sending"}
+        >
           {status === "sending" ? "Sending..." : contactPage.form.submitLabel}
         </Button>
       </div>

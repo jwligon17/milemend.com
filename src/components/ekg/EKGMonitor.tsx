@@ -11,7 +11,6 @@ export type EKGMonitorHandle = {
   triggerSpike: (intensity?: number) => void;
 };
 
-const DEFAULT_HEIGHT = 96;
 const SPEED_PX = 2.5;
 const DEFAULT_SPEED = SPEED_PX;
 const MAX_SAMPLE_ABS = 1.35;
@@ -49,7 +48,7 @@ function clamp(value: number, min: number, max: number) {
 }
 
 export const EKGMonitor = forwardRef<EKGMonitorHandle, EKGMonitorProps>(function EKGMonitor(
-  { height = DEFAULT_HEIGHT, className, speed = DEFAULT_SPEED },
+  { height, className, speed = DEFAULT_SPEED },
   ref,
 ) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -271,7 +270,18 @@ export const EKGMonitor = forwardRef<EKGMonitorHandle, EKGMonitorProps>(function
     };
   }, [height, speed]);
 
-  return <canvas ref={canvasRef} className={className} style={{ width: "100%", height, display: "block", background: "transparent" }} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className={className}
+      style={{
+        width: "100%",
+        ...(height !== undefined ? { height } : {}),
+        display: "block",
+        background: "transparent",
+      }}
+    />
+  );
 });
 EKGMonitor.displayName = "EKGMonitor";
 
