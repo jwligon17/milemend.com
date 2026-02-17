@@ -100,12 +100,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             </ul>
 
             <div className="mt-5 flex flex-wrap gap-3">
-              <Button
-                href="/contact"
-                size="lg"
-                variant="ink"
-                className="!inline-flex !bg-slate-900 !text-white hover:!bg-slate-800"
-              >
+              <Button href="/contact" size="lg" variant="ink">
                 Request a demo
               </Button>
             </div>

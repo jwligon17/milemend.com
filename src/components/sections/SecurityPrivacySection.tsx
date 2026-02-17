@@ -1,47 +1,63 @@
-import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 
 export function SecurityPrivacySection() {
   return (
-    <section className="py-14 md:py-16 lg:py-20">
-      <Container>
-        <div className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-700">SECURITY</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl">Security &amp; Privacy</h1>
-          <p className="mt-4 text-base leading-7 text-slate-600 md:text-lg">
-            This page outlines current security and privacy practices at a high level.
+    <section className="overflow-visible py-14 md:py-16 lg:py-20">
+      <Container className="overflow-visible">
+        <div className="mx-auto max-w-4xl text-center">
+          <h1 className="page-title text-transparent bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text">
+            Compliance Centered
+          </h1>
+          <p className="mx-auto mt-3 max-w-4xl text-base leading-7 text-slate-600 md:text-lg">
+            There is no workaround for security and privacy compliance.{" "}
+            <span className="md:whitespace-nowrap">Defensible data starts here.</span>
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-14 lg:gap-8">
-          <Card className="rounded-2xl border-slate-200 p-7 shadow-sm ring-1 ring-slate-200/70 hover:translate-y-0 hover:shadow-sm lg:p-8">
-            <h2 className="text-lg font-bold text-slate-900">Data handling</h2>
-            <div className="mt-3 space-y-4 text-sm leading-7 text-slate-600">
-              <p>Data flows and retention are designed to support operational use while limiting unnecessary exposure.</p>
-              <p>Detailed policy documents are available during security review.</p>
+        <div className="complianceBox relative z-0 mx-auto mt-8 w-full overflow-visible px-8 pt-8 pb-10 md:px-10 md:pt-10 md:pb-12 lg:mt-3">
+          <div className="pointer-events-none absolute left-0 top-0 z-0 h-[2px] w-full bg-[linear-gradient(90deg,#ff674d_0%,#ff674d_52%,rgba(255,103,77,0.42)_74%,transparent_100%)]" />
+          <div className="pointer-events-none absolute left-0 top-0 z-0 h-full w-[2px] bg-gradient-to-b from-[#ff382e] to-transparent" />
+
+          <div className="relative z-10 flex flex-col space-y-12">
+            <div className="space-y-3">
+              <h3 className="m-0 text-lg font-bold leading-tight text-slate-900">Data Handling</h3>
+              <p className="m-0 text-sm leading-normal text-slate-600">
+                Data flows and retention are designed to support operational use while limiting unnecessary exposure and
+                liability.
+              </p>
             </div>
-          </Card>
-          <Card className="rounded-2xl border-slate-200 p-7 shadow-sm ring-1 ring-slate-200/70 hover:translate-y-0 hover:shadow-sm lg:p-8">
-            <h2 className="text-lg font-bold text-slate-900">Access controls</h2>
-            <div className="mt-3 space-y-4 text-sm leading-7 text-slate-600">
-              <p>Role-based access patterns are used to align account permissions with job responsibilities.</p>
-              <p>Authentication and account lifecycle controls are shared as part of implementation planning.</p>
+
+            <div className="space-y-3">
+              <h3 className="m-0 text-lg font-bold leading-tight text-slate-900">Access Controls</h3>
+              <p className="m-0 text-sm leading-normal text-slate-600">
+                Role-based access patterns are used to align account permissions with job responsibilities.
+                Authentication and account lifecycle controls are shared as a part of implementation planning.
+              </p>
             </div>
-          </Card>
-          <Card className="rounded-2xl border-slate-200 p-7 shadow-sm ring-1 ring-slate-200/70 hover:translate-y-0 hover:shadow-sm lg:p-8">
-            <h2 className="text-lg font-bold text-slate-900">Hosting</h2>
-            <div className="mt-3 space-y-4 text-sm leading-7 text-slate-600">
-              <p>Hosting is selected to balance reliability, operational visibility, and maintainability.</p>
-              <p>Environment and backup practices are reviewed with each customer deployment.</p>
+
+            <div className="space-y-3">
+              <h3 className="m-0 text-lg font-bold leading-tight text-slate-900">Hosting</h3>
+              <p className="m-0 text-sm leading-normal text-slate-600">
+                Hosting is selected to balance reliability, operational visibility, and maintainability. Environment and
+                backup practices are reviewed with each customer deployment.
+              </p>
             </div>
-          </Card>
-          <Card className="rounded-2xl border-slate-200 p-7 shadow-sm ring-1 ring-slate-200/70 hover:translate-y-0 hover:shadow-sm lg:p-8">
-            <h2 className="text-lg font-bold text-slate-900">Support</h2>
-            <div className="mt-3 space-y-4 text-sm leading-7 text-slate-600">
-              <p>Support workflows cover issue intake, triage, and follow-up communication.</p>
-              <p>Support channels and escalation paths are defined at onboarding.</p>
+
+            <div className="space-y-3">
+              <h3 className="m-0 text-lg font-bold leading-tight text-slate-900">Support</h3>
+              <p className="m-0 text-sm leading-normal text-slate-600">
+                Support workflows cover issue intake, triage, and follow-up communication. Support channels and escalation
+                paths are defined at onboarding.
+              </p>
             </div>
-          </Card>
+          </div>
+        </div>
+
+        <div className="relative z-20 mt-16 flex justify-center overflow-visible">
+          <Button href="/contact" size="lg" variant="ink">
+            Request a demo
+          </Button>
         </div>
       </Container>
     </section>

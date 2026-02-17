@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { PageTitle } from "@/components/PageTitle";
 import type { MilemendContent } from "@/content/milemend";
 
 type CoreCapabilitiesSectionProps = {
@@ -10,18 +11,7 @@ export function CoreCapabilitiesSection({ coreCapabilities }: CoreCapabilitiesSe
     <section className="relative overflow-x-clip bg-white py-16 sm:py-20">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(180deg, #0B0F19 0%, #6B7280 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              A Focused Toolkit
-            </span>
-          </h2>
+          <PageTitle>A Focused Toolkit</PageTitle>
           <p className="mt-4 text-pretty text-base leading-relaxed text-slate-600 sm:text-lg">
             supporting your municipalities core capabilities for street condition decisions
           </p>

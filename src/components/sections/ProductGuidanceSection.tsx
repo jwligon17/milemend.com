@@ -4,11 +4,11 @@ import { Container } from "@/components/ui/Container";
 
 export function ProductGuidanceSection() {
   return (
-    <section className="overflow-hidden bg-white py-16 sm:py-20">
+    <section className="overflow-x-hidden bg-white pt-16 pb-10 sm:pt-20 sm:pb-12">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)] lg:items-start lg:gap-20">
           <div>
-            <h2 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+            <h2 className="section-h1">
               <span className="block">Guidance where</span>
               <span className="block">you need it</span>
             </h2>

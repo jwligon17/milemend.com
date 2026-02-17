@@ -23,3 +23,36 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+@layer components {
+  .page-title,
+  h1.page-title,
+  h2.page-title {
+    @apply text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl;
+  }
+
+  .page-title--default {
+    @apply bg-gradient-to-b from-[#0B0F19] to-[#6B7280] bg-clip-text text-transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-h1 {
+    @apply text-balance text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl;
+    @apply bg-gradient-to-b from-[#0B0F19] to-[#6B7280] bg-clip-text text-transparent;
+    -webkit-text-fill-color: transparent;
+    padding-bottom: 0.08em;
+  }
+}
+
+.text-gradient-dark {
+  background-image: linear-gradient(180deg, #0b0f19 0%, #6b7280 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.complianceBox h3,
+.complianceBox p {
+  margin: 0;
+}

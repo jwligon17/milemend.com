@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 
 const PERIOD = 320;
 const SEGMENT_COUNT = 12;
@@ -10,14 +10,14 @@ const IMPULSE_DISTANCE = 130;
 const IMPULSE_DURATION_MS = 420;
 const WAVE_PATH =
   "M0 32 L40 32 L64 32 L84 14 L98 52 L116 8 L132 56 L152 32 L220 32 L240 22 L252 32 L320 32";
+const CORE_STROKE_WIDTH = 3;
+const GLOW_STROKE_WIDTH = 8;
+const GLOW_OPACITY = 0.2;
 
 type EkgShiftVars = CSSProperties & { "--ekgShift"?: string };
 
-const pathStyle: CSSProperties = {
-  filter: "drop-shadow(0 0 2px rgba(48, 255, 5, 0.35))",
-};
-
 export function EkgWave() {
+  const glowFilterId = useId();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const scrollShiftRef = useRef(0);
   const impulseShiftRef = useRef(0);
@@ -121,8 +121,18 @@ export function EkgWave() {
   const wrapperStyle: EkgShiftVars = { "--ekgShift": "0" };
 
   return (
-    <div ref={containerRef} className="mt-6 h-14 w-full overflow-hidden" style={wrapperStyle} onPointerDown={handlePointerDown}>
-      <svg viewBox="0 0 640 64" className="h-full w-full" aria-hidden="true" focusable="false">
+    <div
+      ref={containerRef}
+      className="mt-6 h-20 w-full overflow-x-hidden overflow-y-visible py-2"
+      style={wrapperStyle}
+      onPointerDown={handlePointerDown}
+    >
+      <svg viewBox="0 0 640 64" className="h-full w-full" aria-hidden="true" focusable="false" style={{ overflow: "visible" }}>
+        <defs>
+          <filter id={glowFilterId} filterUnits="userSpaceOnUse" x="-120" y="-120" width="880" height="304">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+          </filter>
+        </defs>
         <g
           style={{
             transform: "translate3d(calc(var(--ekgShift, 0) * -1px), 0, 0)",
@@ -130,17 +140,28 @@ export function EkgWave() {
           }}
         >
           {Array.from({ length: SEGMENT_COUNT }, (_, i) => i - 1).map((segment) => (
-            <path
-              key={segment}
-              d={WAVE_PATH}
-              transform={`translate(${segment * PERIOD} 0)`}
-              fill="none"
-              stroke="#30ff05"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={pathStyle}
-            />
+            <g key={segment} transform={`translate(${segment * PERIOD} 0)`}>
+              <path
+                d={WAVE_PATH}
+                fill="none"
+                stroke="#30ff05"
+                strokeWidth={GLOW_STROKE_WIDTH}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={GLOW_OPACITY}
+                vectorEffect="non-scaling-stroke"
+                filter={`url(#${glowFilterId})`}
+              />
+              <path
+                d={WAVE_PATH}
+                fill="none"
+                stroke="#30ff05"
+                strokeWidth={CORE_STROKE_WIDTH}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                vectorEffect="non-scaling-stroke"
+              />
+            </g>
           ))}
         </g>
       </svg>

@@ -13,14 +13,7 @@ export function WhatYouGetSection({ whatYouGet }: WhatYouGetSectionProps) {
       <Container>
         <header className="mx-auto mb-3 max-w-4xl text-center sm:mb-4 lg:mb-4">
           <h2 className="text-4xl font-bold leading-[1.05] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(180deg, #0B0F19 0%, #6B7280 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
+            <span className="text-gradient-dark">
               {whatYouGet.title}
             </span>
           </h2>

@@ -3,7 +3,7 @@
   margin-top: 1.5rem;
   height: 120px;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   cursor: pointer;
   touch-action: manipulation;
 }
@@ -17,10 +17,7 @@
 .svg {
   height: 100%;
   width: 100%;
-}
-
-.baselineGlow {
-  opacity: 0.32;
+  overflow: visible;
 }
 
 .spikeBase {

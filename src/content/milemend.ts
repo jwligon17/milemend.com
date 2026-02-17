@@ -249,9 +249,7 @@ export const milemendContent: MilemendContent = {
     text: "Meet the next step in Infrastructure Intelligence",
     emphasize: "Infrastructure Intelligence",
   },
-  utilityLinks: [
-    { label: "FAQ", href: "/resources/faq" },
-  ],
+  utilityLinks: [],
   ctas: {
     primary: {
       label: "Request a demo",
@@ -280,16 +278,11 @@ export const milemendContent: MilemendContent = {
       label: "Contact",
       href: "/contact",
     },
-    {
-      label: "FAQ",
-      href: "/resources/faq",
-    },
   ],
   footer: {
     links: [
       { label: "Product", href: "/product" },
       { label: "Security & Privacy", href: "/security-privacy" },
-      { label: "FAQ", href: "/resources/faq" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],

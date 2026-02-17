@@ -1,11 +1,12 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import styles from "./EKGLine.module.css";
 
 const STROKE_COLOR = "#39ff14";
+const GLOW_OPACITY = 0.22;
 const BASELINE_PATH = "M 0 40 H 1000";
 const SPIKE_PATH = "M 470 40 H 485 L 500 8 L 518 72 L 535 40 H 550";
 const DRAW_MS = 560;
@@ -32,6 +33,7 @@ function usePrefersReducedMotion() {
 }
 
 export function EKGLine({ autoPulseAfterInteraction = true }: EKGLineProps) {
+  const glowFilterId = useId();
   const spikeMeasureRef = useRef<SVGPathElement | null>(null);
   const hideTimerRef = useRef<number | null>(null);
   const pulseTimerRef = useRef<number | null>(null);
@@ -172,17 +174,12 @@ export function EKGLine({ autoPulseAfterInteraction = true }: EKGLineProps) {
         }
       }}
     >
-      <svg viewBox="0 0 1000 80" className={styles.svg} aria-hidden="true" focusable="false">
+      <svg viewBox="0 0 1000 80" className={styles.svg} aria-hidden="true" focusable="false" style={{ overflow: "visible" }}>
         <defs>
-          <filter id="ekg-neon-glow" x="-15%" y="-300%" width="130%" height="700%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
+          <filter id={glowFilterId} filterUnits="userSpaceOnUse" x="-120" y="-120" width="1240" height="320">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
           </filter>
         </defs>
-
         <path
           d={BASELINE_PATH}
           fill="none"
@@ -190,8 +187,9 @@ export function EKGLine({ autoPulseAfterInteraction = true }: EKGLineProps) {
           strokeWidth="9"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={styles.baselineGlow}
-          filter="url(#ekg-neon-glow)"
+          vectorEffect="non-scaling-stroke"
+          opacity={GLOW_OPACITY}
+          filter={`url(#${glowFilterId})`}
         />
         <path
           d={BASELINE_PATH}
@@ -200,43 +198,70 @@ export function EKGLine({ autoPulseAfterInteraction = true }: EKGLineProps) {
           strokeWidth="4"
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
 
         {mode !== "idle" && (
-          <path
-            key={runKey}
-            d={SPIKE_PATH}
-            fill="none"
-            stroke={STROKE_COLOR}
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            filter="url(#ekg-neon-glow)"
-            className={`${styles.spikeBase} ${mode === "draw" ? styles.spikeDraw : styles.spikeInstant}`}
-            style={
-              {
-                "--dash-len": dashLen,
-                "--draw-ms": `${DRAW_MS}ms`,
-                "--fade-ms": `${FADE_MS}ms`,
-              } as CSSProperties
-            }
-            onAnimationEnd={(event) => {
-              if (event.animationName.includes("ekgFade")) {
-                setMode("idle");
+          <>
+            <path
+              key={`${runKey}-glow`}
+              d={SPIKE_PATH}
+              fill="none"
+              stroke={STROKE_COLOR}
+              strokeWidth="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+              opacity={GLOW_OPACITY}
+              filter={`url(#${glowFilterId})`}
+              className={`${styles.spikeBase} ${mode === "draw" ? styles.spikeDraw : styles.spikeInstant}`}
+              style={
+                {
+                  "--dash-len": dashLen,
+                  "--draw-ms": `${DRAW_MS}ms`,
+                  "--fade-ms": `${FADE_MS}ms`,
+                } as CSSProperties
               }
-            }}
-          />
+            />
+            <path
+              key={`${runKey}-core`}
+              d={SPIKE_PATH}
+              fill="none"
+              stroke={STROKE_COLOR}
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+              className={`${styles.spikeBase} ${mode === "draw" ? styles.spikeDraw : styles.spikeInstant}`}
+              style={
+                {
+                  "--dash-len": dashLen,
+                  "--draw-ms": `${DRAW_MS}ms`,
+                  "--fade-ms": `${FADE_MS}ms`,
+                } as CSSProperties
+              }
+              onAnimationEnd={(event) => {
+                if (event.animationName.includes("ekgFade")) {
+                  setMode("idle");
+                }
+              }}
+            />
+          </>
         )}
 
         {writeHeadPoint && (
-          <circle
-            cx={writeHeadPoint.x}
-            cy={writeHeadPoint.y}
-            r="3.5"
-            fill={STROKE_COLOR}
-            className={styles.writeHead}
-            filter="url(#ekg-neon-glow)"
-          />
+          <>
+            <circle
+              cx={writeHeadPoint.x}
+              cy={writeHeadPoint.y}
+              r="5.2"
+              fill={STROKE_COLOR}
+              opacity={GLOW_OPACITY}
+              filter={`url(#${glowFilterId})`}
+              className={styles.writeHead}
+            />
+            <circle cx={writeHeadPoint.x} cy={writeHeadPoint.y} r="3.5" fill={STROKE_COLOR} className={styles.writeHead} />
+          </>
         )}
 
         <path
@@ -247,6 +272,7 @@ export function EKGLine({ autoPulseAfterInteraction = true }: EKGLineProps) {
           strokeWidth="4"
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
           style={{ opacity: 0 }}
         />
       </svg>

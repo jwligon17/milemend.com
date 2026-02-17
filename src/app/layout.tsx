@@ -28,17 +28,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/favicon.ico",
+        url: "/ekg.png",
         width: 256,
         height: 256,
         alt: "Milemend placeholder Open Graph image",
       },
     ],
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
   },
 };
 
