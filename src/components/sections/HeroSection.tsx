@@ -65,7 +65,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-x-hidden lg:overflow-x-visible border-b border-slate-200/80 bg-white pt-1 pb-2 sm:pt-2 sm:pb-3 lg:pt-2 lg:pb-3"
+      className="relative overflow-x-hidden lg:overflow-x-visible border-b border-slate-200/80 bg-white pt-0 pb-1 sm:pt-2 sm:pb-3 lg:pt-2 lg:pb-3"
     >
       <div
         className="pointer-events-none absolute inset-y-0 left-[45%] right-0 hidden bg-gradient-to-r from-mint via-cream to-blush opacity-55 blur-2xl lg:block"
@@ -74,7 +74,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
       <Container className="relative">
         <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:translate-x-10 xl:translate-x-12">
           <div className="mb-6 max-w-xl lg:mb-0 lg:max-w-2xl">
-            <h1 className="text-shadow-soft text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl lg:whitespace-nowrap">
+            <h1 className="text-shadow-soft text-balance text-2xl font-bold leading-[1.05] tracking-tight sm:text-3xl lg:text-7xl lg:whitespace-nowrap">
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -88,18 +88,18 @@ export function HeroSection({ hero }: HeroSectionProps) {
               </span>
             </h1>
             {hero.supportingLine ? (
-              <p className="mt-4 max-w-xl text-pretty text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 lg:text-xl lg:leading-8">
+              <p className="mt-3 max-w-xl text-pretty text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 lg:text-xl lg:leading-8">
                 {hero.supportingLine}
               </p>
             ) : null}
 
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-900 marker:text-slate-900 sm:text-base lg:text-sm">
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-slate-900 marker:text-slate-900 sm:text-sm lg:text-sm">
               {hero.bullets.map((bullet) => (
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
 
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-4 flex flex-wrap gap-3 lg:mt-5">
               <Button href="/contact" size="lg" variant="ink">
                 Request a demo
               </Button>
@@ -113,27 +113,29 @@ export function HeroSection({ hero }: HeroSectionProps) {
             />
 
             {isPhone ? (
-              <div className="relative mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-xs">
+              <div className="relative mx-auto w-full max-w-[260px] sm:max-w-[300px] lg:max-w-xs">
                 <Image
                   src={heroImageSrc}
                   alt={heroImageAlt}
                   width={900}
                   height={1200}
-                  className="h-auto w-full object-contain drop-shadow-2xl"
+                  className="h-auto w-full object-contain drop-shadow-xl sm:drop-shadow-2xl lg:drop-shadow-2xl"
                   priority
                   sizes="(min-width: 1024px) 22rem, (min-width: 640px) 28rem, 90vw"
                 />
 
                 <div
                   ref={mpciWrapRef}
-                  className="relative z-20 mt-4 hidden lg:block lg:absolute lg:-top-6 lg:-right-6 lg:mt-0"
+                  className="relative z-20 mt-4 lg:absolute lg:-top-6 lg:-right-6 lg:mt-0"
                 >
-                  <article className="translate-y-0 w-40 rounded-xl border border-slate-200 bg-white p-3 shadow-lg sm:translate-y-0 sm:w-44 sm:p-3.5 md:translate-y-0 lg:translate-y-full lg:w-48 lg:p-4">
+                  <article className="translate-y-0 w-36 rounded-xl border border-slate-200 bg-white p-2.5 shadow-md sm:w-40 sm:p-3 lg:translate-y-full lg:w-48 lg:p-4 lg:shadow-lg">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
                       {hero.heroVisual.metricCard.label}
                     </p>
                     <div className="mt-1 flex items-end justify-between gap-3">
-                      <p className="text-3xl font-bold leading-none text-slate-900">{hero.heroVisual.metricCard.value}</p>
+                      <p className="text-2xl font-bold leading-none text-slate-900 sm:text-3xl lg:text-3xl">
+                        {hero.heroVisual.metricCard.value}
+                      </p>
                       <p className="mt-2 flex items-center gap-1 text-xs font-normal text-forest opacity-100 blur-0 filter-none">
                         <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" aria-hidden>
                           <path
@@ -155,14 +157,14 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
                 <div
                   ref={tableWrapRef}
-                  className="relative z-20 mt-4 hidden lg:block lg:absolute lg:-bottom-6 lg:-left-6 lg:mt-0"
+                  className="relative z-20 mt-4 lg:absolute lg:-bottom-6 lg:-left-6 lg:mt-0"
                 >
-                  <article className="translate-y-0 w-[80%] max-w-[12.5rem] pointer-events-none rounded-xl border border-slate-200 bg-white p-3 shadow-lg sm:translate-y-0 sm:w-[86%] sm:max-w-[14rem] sm:p-3.5 md:translate-y-0 lg:-translate-y-1/2 lg:w-[92%] lg:max-w-xs lg:p-4">
+                  <article className="translate-y-0 w-full max-w-[320px] pointer-events-none rounded-xl border border-slate-200 bg-white p-3 shadow-md sm:max-w-[360px] lg:-translate-y-1/2 lg:w-[92%] lg:max-w-xs lg:p-4 lg:shadow-lg">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-600">
                       {hero.heroVisual.miniTable.title}
                     </p>
                     <div className="mt-3 overflow-x-auto overflow-y-hidden">
-                      <table className="table-fixed w-full text-left text-[10px] leading-tight text-slate-700">
+                      <table className="table-fixed w-full text-left text-[9px] leading-tight text-slate-700 sm:text-[10px] lg:text-[10px]">
                         <thead>
                           <tr>
                             {hero.heroVisual.miniTable.columns.map((column) => (
@@ -209,7 +211,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                   </div>
                 </div>
 
-                <article className="relative z-20 mt-6 ml-auto w-44 rounded-xl bg-white p-3.5 shadow-lg ring-1 ring-slate-200/70 sm:w-48 lg:absolute lg:-top-6 lg:right-0 lg:mt-0">
+                <article className="relative z-20 mt-4 ml-auto w-44 rounded-xl bg-white p-3.5 shadow-lg ring-1 ring-slate-200/70 sm:w-48 lg:absolute lg:-top-6 lg:right-0 lg:mt-0">
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
                     {hero.heroVisual.metricCard.label}
                   </p>
@@ -233,7 +235,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                   </div>
                 </article>
 
-                <article className="relative z-20 mt-6 w-72 pointer-events-none rounded-2xl bg-white p-4 shadow-lg ring-1 ring-slate-200/70 lg:absolute lg:-bottom-6 lg:left-6 lg:-translate-y-1/2 lg:mt-0">
+                <article className="relative z-20 mt-4 w-72 pointer-events-none rounded-2xl bg-white p-4 shadow-lg ring-1 ring-slate-200/70 lg:absolute lg:-bottom-6 lg:left-6 lg:-translate-y-1/2 lg:mt-0">
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-600">
                     {hero.heroVisual.miniTable.title}
                   </p>
