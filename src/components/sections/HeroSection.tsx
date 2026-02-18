@@ -73,7 +73,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
       />
       <Container className="relative">
         <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:translate-x-10 xl:translate-x-12">
-          <div className="max-w-xl lg:max-w-2xl">
+          <div className="mb-6 max-w-xl lg:mb-0 lg:max-w-2xl">
             <h1 className="text-shadow-soft text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl lg:whitespace-nowrap">
               <span
                 className="bg-clip-text text-transparent"
@@ -88,12 +88,12 @@ export function HeroSection({ hero }: HeroSectionProps) {
               </span>
             </h1>
             {hero.supportingLine ? (
-              <p className="mt-3 max-w-xl text-pretty text-xl leading-8 text-slate-600">
+              <p className="mt-4 max-w-xl text-pretty text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 lg:text-xl lg:leading-8">
                 {hero.supportingLine}
               </p>
             ) : null}
 
-            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-900 marker:text-slate-900">
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-900 marker:text-slate-900 sm:text-base lg:text-sm">
               {hero.bullets.map((bullet) => (
                 <li key={bullet}>{bullet}</li>
               ))}
@@ -106,14 +106,14 @@ export function HeroSection({ hero }: HeroSectionProps) {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl pt-0 pb-2">
+          <div className="relative mx-auto mt-8 w-full max-w-xl overflow-x-hidden pt-0 pb-2 lg:mt-0 lg:overflow-x-visible">
             <div
               className="pointer-events-none absolute inset-y-0 right-0 w-[60%] bg-gradient-to-l from-blush via-cream to-transparent opacity-70"
               aria-hidden
             />
 
             {isPhone ? (
-              <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:max-w-xs">
+              <div className="relative mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-xs">
                 <Image
                   src={heroImageSrc}
                   alt={heroImageAlt}
@@ -126,7 +126,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
                 <div
                   ref={mpciWrapRef}
-                  className="relative z-20 mt-6 sm:mt-6 md:mt-6 lg:absolute lg:-top-6 lg:-right-6 lg:mt-0"
+                  className="relative z-20 mt-4 hidden lg:block lg:absolute lg:-top-6 lg:-right-6 lg:mt-0"
                 >
                   <article className="translate-y-0 w-40 rounded-xl border border-slate-200 bg-white p-3 shadow-lg sm:translate-y-0 sm:w-44 sm:p-3.5 md:translate-y-0 lg:translate-y-full lg:w-48 lg:p-4">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
@@ -155,7 +155,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
                 <div
                   ref={tableWrapRef}
-                  className="relative z-20 mt-6 sm:mt-6 md:mt-6 lg:absolute lg:-bottom-6 lg:-left-6 lg:mt-0"
+                  className="relative z-20 mt-4 hidden lg:block lg:absolute lg:-bottom-6 lg:-left-6 lg:mt-0"
                 >
                   <article className="translate-y-0 w-[80%] max-w-[12.5rem] pointer-events-none rounded-xl border border-slate-200 bg-white p-3 shadow-lg sm:translate-y-0 sm:w-[86%] sm:max-w-[14rem] sm:p-3.5 md:translate-y-0 lg:-translate-y-1/2 lg:w-[92%] lg:max-w-xs lg:p-4">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-600">
