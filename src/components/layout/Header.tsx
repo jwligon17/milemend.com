@@ -37,6 +37,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
 
   const wrapperRef = useRef<HTMLElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const mobileDrawerRef = useRef<HTMLDivElement | null>(null);
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const panelId = useId();
   const logoSrc = content.brand.logo?.src;
@@ -45,10 +46,13 @@ export function Header({ content = milemendContent }: HeaderProps) {
 
   useEffect(() => {
     function onPointerDown(event: PointerEvent) {
-      if (!wrapperRef.current?.contains(event.target as Node)) {
-        setOpenDesktopIndex(null);
-        setMobileOpen(false);
-      }
+      const target = event.target as Node;
+
+      if (mobileOpen && mobileDrawerRef.current?.contains(target)) return;
+      if (wrapperRef.current?.contains(target)) return;
+
+      setOpenDesktopIndex(null);
+      setMobileOpen(false);
     }
 
     function onKeyDown(event: KeyboardEvent) {
@@ -67,7 +71,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
       window.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, []);
+  }, [mobileOpen]);
 
   useEffect(() => {
     if (openDesktopIndex === null) return;
@@ -263,13 +267,14 @@ export function Header({ content = milemendContent }: HeaderProps) {
         ? createPortal(
             <div className="lg:hidden">
               <div
-                className="fixed inset-0 z-[1000] bg-slate-950/55"
+                className="pointer-events-auto fixed inset-0 z-[1000] bg-slate-950/55"
                 aria-hidden
                 onClick={() => setMobileOpen(false)}
               />
               <div
+                ref={mobileDrawerRef}
                 id="mobile-nav-drawer"
-                className="fixed inset-y-0 right-0 z-[1100] w-full max-w-sm overflow-y-auto border-l border-slate-200 bg-white p-5 shadow-xl"
+                className="pointer-events-auto fixed inset-y-0 right-0 z-[1100] w-full max-w-sm overflow-y-auto border-l border-slate-200 bg-white p-5 shadow-xl"
                 role="dialog"
                 aria-modal="true"
                 aria-label="Mobile navigation"
@@ -285,7 +290,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
                   </button>
                 </div>
 
-                <ul className="space-y-2">
+                <ul className="pointer-events-auto space-y-2">
                   {content.mainNav.map((item, index) => {
                     const groups = item.megaMenu?.groups ?? [];
                     const isOpen = openMobileIndex === index;
@@ -293,10 +298,10 @@ export function Header({ content = milemendContent }: HeaderProps) {
 
                     if (!groups.length) {
                       return (
-                        <li key={item.label}>
+                        <li key={item.label} className="pointer-events-auto">
                           <Link
                             href={getNavHref(item)}
-                            className="block rounded-md border border-slate-200 px-4 py-3 text-sm font-normal text-slate-800"
+                            className="pointer-events-auto block rounded-md border border-slate-200 px-4 py-3 text-sm font-normal text-slate-800"
                             onClick={() => setMobileOpen(false)}
                           >
                             {item.label}
@@ -306,7 +311,10 @@ export function Header({ content = milemendContent }: HeaderProps) {
                     }
 
                     return (
-                      <li key={item.label} className="rounded-lg border border-slate-200">
+                      <li
+                        key={item.label}
+                        className="pointer-events-auto rounded-lg border border-slate-200"
+                      >
                         <button
                           type="button"
                           aria-expanded={isOpen}
@@ -325,13 +333,13 @@ export function Header({ content = milemendContent }: HeaderProps) {
                                 <p className="mb-2 text-xs font-bold uppercase tracking-wider text-cyan-800">
                                   {group.title}
                                 </p>
-                                <ul className="space-y-1">
+                                <ul className="pointer-events-auto space-y-1">
                                   {group.links.map((link) => (
-                                    <li key={link.label}>
+                                    <li key={link.label} className="pointer-events-auto">
                                       <Link
                                         href={link.href}
                                         onClick={() => setMobileOpen(false)}
-                                        className="block rounded-md px-2 py-2 text-sm text-slate-700 transition hover:bg-slate-100"
+                                        className="pointer-events-auto block rounded-md px-2 py-2 text-sm text-slate-700 transition hover:bg-slate-100"
                                       >
                                         {link.label}
                                       </Link>
