@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
+import { createPortal } from "react-dom";
 
 import { milemendContent } from "@/content/milemend";
 import type { MainNavItem, MilemendContent } from "@/content/milemend";
@@ -32,6 +33,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMobileIndex, setOpenMobileIndex] = useState<number | null>(null);
   const [failedLogoSrc, setFailedLogoSrc] = useState<string | null>(null);
+  const [mounted] = useState(() => typeof window !== "undefined");
 
   const wrapperRef = useRef<HTMLElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -127,7 +129,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
   return (
     <header
       ref={wrapperRef}
-      className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/65"
+      className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/80 lg:backdrop-blur-xl supports-[backdrop-filter]:lg:bg-white/65"
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-4 lg:px-8">
         <Link
@@ -257,96 +259,98 @@ export function Header({ content = milemendContent }: HeaderProps) {
         </div>
       ) : null}
 
-      {mobileOpen ? (
-        <div className="lg:hidden">
-          <div
-            className="fixed inset-0 z-[90] bg-slate-950/55"
-            aria-hidden
-            onClick={() => setMobileOpen(false)}
-          />
-          <div
-            id="mobile-nav-drawer"
-            className="fixed inset-y-0 right-0 z-[100] w-full max-w-sm overflow-y-auto border-l border-slate-200 bg-white p-5 shadow-xl"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation"
-          >
-            <div className="mb-6 flex items-center justify-between">
-              <p className="text-sm font-bold text-slate-900">{content.brand.name}</p>
-              <button
-                type="button"
+      {mobileOpen && mounted
+        ? createPortal(
+            <div className="lg:hidden">
+              <div
+                className="fixed inset-0 z-[1000] bg-slate-950/55"
+                aria-hidden
                 onClick={() => setMobileOpen(false)}
-                className="rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-700"
+              />
+              <div
+                id="mobile-nav-drawer"
+                className="fixed inset-y-0 right-0 z-[1100] w-full max-w-sm overflow-y-auto border-l border-slate-200 bg-white p-5 shadow-xl"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile navigation"
               >
-                Close
-              </button>
-            </div>
+                <div className="mb-6 flex items-center justify-between">
+                  <p className="text-sm font-bold text-slate-900">{content.brand.name}</p>
+                  <button
+                    type="button"
+                    onClick={() => setMobileOpen(false)}
+                    className="rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-700"
+                  >
+                    Close
+                  </button>
+                </div>
 
-            <ul className="space-y-2">
-              {content.mainNav.map((item, index) => {
-                const groups = item.megaMenu?.groups ?? [];
-                const isOpen = openMobileIndex === index;
-                const accordionId = `mobile-accordion-${index}`;
+                <ul className="space-y-2">
+                  {content.mainNav.map((item, index) => {
+                    const groups = item.megaMenu?.groups ?? [];
+                    const isOpen = openMobileIndex === index;
+                    const accordionId = `mobile-accordion-${index}`;
 
-                if (!groups.length) {
-                  return (
-                    <li key={item.label}>
-                      <Link
-                        href={getNavHref(item)}
-                        className="block rounded-md border border-slate-200 px-4 py-3 text-sm font-normal text-slate-800"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                }
+                    if (!groups.length) {
+                      return (
+                        <li key={item.label}>
+                          <Link
+                            href={getNavHref(item)}
+                            className="block rounded-md border border-slate-200 px-4 py-3 text-sm font-normal text-slate-800"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      );
+                    }
 
-                return (
-                  <li key={item.label} className="rounded-lg border border-slate-200">
-                    <button
-                      type="button"
-                      aria-expanded={isOpen}
-                      aria-controls={accordionId}
-                      onClick={() => setOpenMobileIndex(isOpen ? null : index)}
-                      className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-bold text-slate-900"
-                    >
-                      <span>{item.label}</span>
-                      <span aria-hidden>{isOpen ? "−" : "+"}</span>
-                    </button>
+                    return (
+                      <li key={item.label} className="rounded-lg border border-slate-200">
+                        <button
+                          type="button"
+                          aria-expanded={isOpen}
+                          aria-controls={accordionId}
+                          onClick={() => setOpenMobileIndex(isOpen ? null : index)}
+                          className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-bold text-slate-900"
+                        >
+                          <span>{item.label}</span>
+                          <span aria-hidden>{isOpen ? "−" : "+"}</span>
+                        </button>
 
-                    {isOpen ? (
-                      <div id={accordionId} className="space-y-4 px-4 pb-4">
-                        {groups.map((group) => (
-                          <div key={group.title}>
-                            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-cyan-800">
-                              {group.title}
-                            </p>
-                            <ul className="space-y-1">
-                              {group.links.map((link) => (
-                                <li key={link.label}>
-                                  <Link
-                                    href={link.href}
-                                    onClick={() => setMobileOpen(false)}
-                                    className="block rounded-md px-2 py-2 text-sm text-slate-700 transition hover:bg-slate-100"
-                                  >
-                                    {link.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
+                        {isOpen ? (
+                          <div id={accordionId} className="space-y-4 px-4 pb-4">
+                            {groups.map((group) => (
+                              <div key={group.title}>
+                                <p className="mb-2 text-xs font-bold uppercase tracking-wider text-cyan-800">
+                                  {group.title}
+                                </p>
+                                <ul className="space-y-1">
+                                  {group.links.map((link) => (
+                                    <li key={link.label}>
+                                      <Link
+                                        href={link.href}
+                                        onClick={() => setMobileOpen(false)}
+                                        className="block rounded-md px-2 py-2 text-sm text-slate-700 transition hover:bg-slate-100"
+                                      >
+                                        {link.label}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    ) : null}
-                  </li>
-                );
-              })}
-            </ul>
-
-          </div>
-        </div>
-      ) : null}
+                        ) : null}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
     </header>
   );
 }
