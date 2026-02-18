@@ -83,6 +83,20 @@ export function Header({ content = milemendContent }: HeaderProps) {
     };
   }, [openDesktopIndex]);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+
+    document.body.style.overflow = "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   const handleDesktopKeyDown = (
     event: ReactKeyboardEvent<HTMLButtonElement>,
     index: number,
@@ -115,14 +129,18 @@ export function Header({ content = milemendContent }: HeaderProps) {
       ref={wrapperRef}
       className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/65"
     >
-      <div className="mx-auto grid h-16 max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="inline-flex items-center overflow-visible" aria-label={content.brand.name}>
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-4 lg:px-8">
+        <Link
+          href="/"
+          className="inline-flex shrink-0 items-center overflow-visible"
+          aria-label={content.brand.name}
+        >
           {logoAvailable ? (
-            <span className="inline-block origin-left scale-[2]">
+            <span className="inline-block origin-left scale-100 lg:scale-[2]">
               <img
                 src={logoSrc}
                 alt={logoAlt}
-                className="h-9 w-auto"
+                className="h-9 w-auto max-w-[180px] sm:max-w-[220px] lg:max-w-none"
                 onError={() => setFailedLogoSrc(logoSrc ?? null)}
               />
             </span>
@@ -191,7 +209,7 @@ export function Header({ content = milemendContent }: HeaderProps) {
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav-drawer"
           onClick={() => setMobileOpen((value) => !value)}
-          className="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-normal text-slate-800 lg:hidden"
+          className="ml-auto inline-flex shrink-0 items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-normal text-slate-800 lg:hidden"
         >
           Menu
         </button>
@@ -242,13 +260,13 @@ export function Header({ content = milemendContent }: HeaderProps) {
       {mobileOpen ? (
         <div className="lg:hidden">
           <div
-            className="fixed inset-0 z-40 bg-slate-950/55"
+            className="fixed inset-0 z-[90] bg-slate-950/55"
             aria-hidden
             onClick={() => setMobileOpen(false)}
           />
           <div
             id="mobile-nav-drawer"
-            className="fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto border-l border-slate-200 bg-white p-5 shadow-xl"
+            className="fixed inset-y-0 right-0 z-[100] w-full max-w-sm overflow-y-auto border-l border-slate-200 bg-white p-5 shadow-xl"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
