@@ -74,7 +74,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
       <Container className="relative">
         <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:translate-x-10 xl:translate-x-12">
           <div className="mb-6 max-w-xl lg:mb-0 lg:max-w-2xl">
-            <h1 className="text-shadow-soft text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl lg:whitespace-nowrap">
+            <h1 className="text-shadow-soft text-balance text-4xl font-bold leading-[1.05] tracking-tight max-sm:text-6xl max-sm:leading-[1.05] max-sm:tracking-tight sm:text-5xl lg:text-7xl lg:whitespace-nowrap">
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -106,14 +106,14 @@ export function HeroSection({ hero }: HeroSectionProps) {
             </div>
           </div>
 
-          <div className="relative mx-auto mt-8 w-full max-w-xl overflow-x-hidden pt-0 pb-2 lg:mt-0 lg:overflow-x-visible">
+          <div className="relative mx-auto mt-8 w-full max-w-xl overflow-x-hidden pt-0 pb-2 max-sm:h-auto max-sm:max-h-none max-sm:overflow-visible lg:mt-0 lg:overflow-x-visible">
             <div
               className="pointer-events-none absolute inset-y-0 right-0 w-[60%] bg-gradient-to-l from-blush via-cream to-transparent opacity-70"
               aria-hidden
             />
 
             {isPhone ? (
-              <div className="relative mx-auto w-full max-w-[260px] sm:max-w-[320px] lg:max-w-xs">
+              <div className="relative mx-auto w-full max-w-[260px] max-sm:h-auto max-sm:max-h-none max-sm:overflow-visible max-sm:pointer-events-none sm:max-w-[320px] lg:max-w-xs">
                 <Image
                   src={heroImageSrc}
                   alt={heroImageAlt}
