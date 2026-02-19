@@ -74,9 +74,9 @@ export function HeroSection({ hero }: HeroSectionProps) {
       <Container className="relative">
         <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:translate-x-10 xl:translate-x-12">
           <div className="mb-6 max-w-xl lg:mb-0 lg:max-w-2xl">
-            <h1 className="text-shadow-soft text-balance text-4xl font-bold leading-[1.05] tracking-tight max-sm:text-6xl max-sm:leading-[1.05] max-sm:tracking-tight sm:text-5xl lg:text-7xl lg:whitespace-nowrap">
+            <h1 className="text-shadow-soft text-balance text-[clamp(2.4rem,9vw,3.0rem)] font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl">
               <span
-                className="bg-clip-text text-transparent"
+                className="whitespace-nowrap bg-clip-text text-transparent"
                 style={{
                   backgroundImage:
                     "linear-gradient(90deg, #30ff05 0%, #fffc00 50%, #ff0000 75%, #ff0000 100%)",
@@ -126,7 +126,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
                 <div
                   ref={mpciWrapRef}
-                  className="absolute right-0 top-0 z-20 lg:absolute lg:-top-6 lg:-right-6 lg:mt-0"
+                  className="absolute z-20 top-2 right-2 lg:absolute lg:-top-6 lg:-right-6 lg:mt-0"
                 >
                   <article className="translate-y-0 w-40 rounded-xl border border-slate-200 bg-white p-3 shadow-md sm:w-44 lg:translate-y-full lg:w-48 lg:p-4 lg:shadow-lg">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
@@ -157,7 +157,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
                 <div
                   ref={tableWrapRef}
-                  className="absolute left-0 -bottom-12 z-20 lg:absolute lg:-bottom-6 lg:-left-6 lg:mt-0"
+                  className="absolute z-20 bottom-2 left-2 lg:absolute lg:-bottom-6 lg:-left-6 lg:mt-0"
                 >
                   <article className="translate-y-0 w-[92%] max-w-[320px] lg:pointer-events-none rounded-xl border border-slate-200 bg-white p-3 shadow-md sm:max-w-[360px] lg:-translate-y-1/2 lg:w-[92%] lg:max-w-xs lg:p-4 lg:shadow-lg">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-600">
