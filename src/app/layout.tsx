@@ -13,6 +13,10 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://milemend.com"),
+  themeColor: "#ffffff",
+  other: {
+    "color-scheme": "light",
+  },
   title: {
     default: "Milemend | Street Maintenance Operations Platform",
     template: "%s | Milemend",
