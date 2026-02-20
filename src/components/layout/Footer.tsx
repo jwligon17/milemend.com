@@ -17,7 +17,7 @@ export function Footer({ content = milemendContent }: FooterProps) {
     "text-[#30ff05] visited:text-[#30ff05] transition-colors hover:text-[#30ff05] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#30ff05]";
 
   return (
-    <footer className="bg-slate-950 text-slate-100">
+    <footer className="bg-black text-slate-100">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_2fr] lg:px-8">
         <section aria-label={`${content.brand.name} overview`}>
           <p className="text-lg font-bold">{content.brand.name}</p>

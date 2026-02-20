@@ -129,7 +129,7 @@ export default function ProductPageClient() {
 
       <Container>
         <div className="flex justify-center py-10 sm:py-12">
-          <Button href="/contact" variant="ink" size="md" className="w-full sm:w-auto">
+          <Button href="/contact" variant="ink" size="md" className="w-full sm:w-auto bg-black hover:bg-black">
             Request a demo
           </Button>
         </div>

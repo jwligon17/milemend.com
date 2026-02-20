@@ -55,7 +55,7 @@ export function SecurityPrivacySection() {
         </div>
 
         <div className="relative z-20 mt-10 flex justify-center overflow-visible sm:mt-12 lg:mt-16">
-          <Button href="/contact" size="lg" variant="ink">
+          <Button href="/contact" size="lg" variant="ink" className="bg-black hover:bg-black">
             Request a demo
           </Button>
         </div>

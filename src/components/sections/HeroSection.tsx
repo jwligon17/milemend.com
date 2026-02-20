@@ -100,7 +100,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
             </ul>
 
             <div className="mt-4 flex flex-wrap gap-3 lg:mt-5">
-              <Button href="/contact" size="lg" variant="ink">
+              <Button href="/contact" size="lg" variant="ink" className="bg-black hover:bg-black">
                 Request a demo
               </Button>
             </div>
@@ -132,12 +132,12 @@ export function HeroSection({ hero }: HeroSectionProps) {
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
                       {hero.heroVisual.metricCard.label}
                     </p>
-                    <div className="mt-1 flex items-end justify-between gap-3">
-                      <p className="text-2xl font-bold leading-none text-slate-900 sm:text-3xl lg:text-3xl">
+                    <div className="mt-1 flex flex-wrap items-end justify-between gap-3 sm:flex-nowrap">
+                      <p className="shrink-0 text-2xl font-bold leading-none text-slate-900 sm:text-3xl lg:text-3xl">
                         {hero.heroVisual.metricCard.value}
                       </p>
-                      <p className="mt-2 flex items-center gap-1 text-xs font-normal text-forest opacity-100 blur-0 filter-none">
-                        <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" aria-hidden>
+                      <p className="mt-2 flex items-center gap-1 text-xs font-normal text-forest opacity-100 blur-0 filter-none max-sm:min-w-0 max-sm:flex-wrap max-sm:max-w-[7.5rem]">
+                        <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 max-sm:shrink-0" aria-hidden>
                           <path
                             d="M3 13l5-5 4 4 5-6M14 6h3v3"
                             fill="none"
@@ -147,7 +147,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        <span>
+                        <span className="max-sm:min-w-0 max-sm:flex-1 max-sm:break-words">
                           {hero.heroVisual.metricCard.delta} {hero.heroVisual.metricCard.deltaLabel}
                         </span>
                       </p>
